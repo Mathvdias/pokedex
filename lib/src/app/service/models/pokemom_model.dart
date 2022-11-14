@@ -1,18 +1,39 @@
+import 'package:flutter/material.dart';
+
 class PokemonModel {
-  PokemonModel({ this.name, this.url});
+  var id;
+  var name;
+  var sprite;
+  var type1;
+  var type2;
 
-  PokemonModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
-  }
+  PokemonModel({
+    this.id,
+    this.name,
+    this.sprite,
+    this.type1,
+    this.type2,
+  });
 
-   String? name;
-   String? url;
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
-    data['name'] = name;
-    data['url'] = url;
-    return data;
+  factory PokemonModel.fromJson(Map<String, dynamic> json) {
+    String pokeId = json['id'].toString();
+    final List types = json['types'];
+    if (types.length == 1) {
+      return PokemonModel(
+        id: pokeId,
+        name: json['name'],
+        sprite: json['sprites']['front_default'],
+        type1: json['types'][0]['type']['name'],
+        type2: null,
+      );
+    } else {
+      return PokemonModel(
+        id: pokeId,
+        name: json['name'],
+        sprite: json['sprites']['front_default'],
+        type1: json['types'][0]['type']['name'],
+        type2: json['types'][1]['type']['name'],
+      );
+    }
   }
 }
