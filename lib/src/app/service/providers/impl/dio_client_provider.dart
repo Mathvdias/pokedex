@@ -6,11 +6,25 @@ import '../../models/response/exception_response.dart';
 import '../http_client_interface.dart';
 
 class DioClient implements IRestClient {
+  late Dio dio ;
   final options = BaseOptions(
     connectTimeout: 1000,
     receiveTimeout: 1000,
   );
-  late Dio dio;
+
+    DioClient.withAuthBasic() {
+    dio = Dio(options);
+    dio.options.contentType = Headers.formUrlEncodedContentType;
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.headers['Authorization'] = 'Basic ';
+          return handler.next(options);
+        },
+      ),
+    );
+    dio.interceptors.add(LogInterceptor(responseBody: false));
+  }
 
   @override
   Future<dynamic> get(String url, {Map<String, dynamic>? queries}) async {
