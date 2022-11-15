@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import 'package:pokedex/src/app/service/providers/impl/dio_client_provider.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_list_repository.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_repository.dart';
@@ -59,6 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final color =
+        Color((math.Random().nextDouble() * 0xFFFF).toInt()).withOpacity(.7);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -71,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: viewModel.scrollController,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
-                  childAspectRatio: 4 / 4,
+                  childAspectRatio: 5 / 8,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20),
               itemCount: viewModel.listAllPokemon.length,
@@ -79,14 +82,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 return Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(15)),
+                      color: color, borderRadius: BorderRadius.circular(15)),
                   child: Column(
                     children: [
                       Image.network(
                         viewModel.listAllPokemon[index].sprite,
                       ),
                       Text(viewModel.listAllPokemon[index].id),
+                      Text(viewModel.listAllPokemon[index].name),
+                      Text(viewModel.listAllPokemon[index].type1 ?? ""),
+                      Text(viewModel.listAllPokemon[index].type2 ?? ""),
                     ],
                   ),
                 );
