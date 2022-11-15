@@ -22,7 +22,7 @@ class PokemonModel {
       return PokemonModel(
         id: pokeId,
         name: json['name'],
-        sprite: json['sprites']['front_default'],
+        sprite: json['sprites']['other']['official-artwork']['front_default'],
         type1: json['types'][0]['type']['name'],
         type2: null,
       );
@@ -30,7 +30,7 @@ class PokemonModel {
       return PokemonModel(
         id: pokeId,
         name: json['name'],
-        sprite: json['sprites']['front_default'],
+        sprite: json['sprites']['other']['official-artwork']['front_default'],
         type1: json['types'][0]['type']['name'],
         type2: json['types'][1]['type']['name'],
       );
