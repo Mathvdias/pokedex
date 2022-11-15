@@ -3,7 +3,6 @@ import 'package:mockito/mockito.dart';
 import 'package:pokedex/src/app/service/models/pokemom_model.dart';
 import 'package:pokedex/src/app/service/providers/http_client_interface.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_repository.dart';
-import 'package:pokedex/src/app/service/repository/pokemon_repository_interface.dart';
 import 'package:pokedex/src/app/viewmodels/pokemon_viewmodel.dart';
 
 class PokemonRepositoryMock implements PokemonRepository {
@@ -11,7 +10,7 @@ class PokemonRepositoryMock implements PokemonRepository {
   IRestClient get client => throw UnimplementedError();
 
   @override
-  Future<PokemonModel> getPokemons() async {
+  Future<PokemonModel> getPokemons(1) async {
     return PokemonModel(
         id: 1, name: "Matheus", sprite: "wather", type1: "Top", type2: "Sim");
   }

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/src/app/service/providers/impl/dio_client_provider.dart';
+import 'package:pokedex/src/app/service/repository/impl/pokemon_list_repository.dart';
+import 'package:pokedex/src/app/service/repository/impl/pokemon_repository.dart';
+import 'package:pokedex/src/app/viewmodels/pokemon_viewmodel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,12 +33,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  final viewModel = PokemonViewModel(
+      PokemonRepository(DioClient.withAuthBasic()),
+      PokemonListRepository(DioClient.withAuthBasic()));
+  @override
+  void initState() {
+    viewModel.fetchAll();
+    viewModel.scrollController = ScrollController();
+    viewModel.scrollController.addListener(() {
+      viewModel.infiniteScrolling();
     });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    viewModel.scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,24 +59,20 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+          child: AnimatedBuilder(
+        animation: viewModel,
+        builder: ((context, child) {
+          return ListView.builder(
+            controller: viewModel.scrollController,
+            itemBuilder: ((context, index) {
+              return Image.network(
+                viewModel.listAllPokemon[index].sprite,
+              );
+            }),
+            itemCount: viewModel.listAllPokemon.length,
+          );
+        }),
+      )),
     );
   }
 }

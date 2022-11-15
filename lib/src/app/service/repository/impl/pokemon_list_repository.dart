@@ -8,9 +8,9 @@ class PokemonListRepository implements IPokemonListRepository {
 
   PokemonListRepository(this.client);
   @override
-  Future<PokemonListModel> getAllPokemons() async {
+  Future<PokemonListModel> getAllPokemons(String page) async {
     var json = await client
-        .get("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
+        .get(page);
     return PokemonListModel.fromJson(json);
   }
 }
