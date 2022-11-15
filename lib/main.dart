@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: viewModel.scrollController,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
-                  childAspectRatio: 3 / 2,
+                  childAspectRatio: 4 / 4,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20),
               itemCount: viewModel.listAllPokemon.length,
