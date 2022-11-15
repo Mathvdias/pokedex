@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:math' as math;
+import 'package:lottie/lottie.dart';
+import '../../common/tag.dart';
 import '../../service/providers/impl/dio_client_provider.dart';
 import '../../service/repository/impl/pokemon_list_repository.dart';
 import '../../service/repository/impl/pokemon_repository.dart';
@@ -37,8 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        Color((math.Random().nextDouble() * 0xFFFF).toInt()).withOpacity(.7);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -56,19 +55,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisSpacing: 20),
               itemCount: viewModel.listAllPokemon.length,
               itemBuilder: (BuildContext ctx, index) {
-                return Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: color, borderRadius: BorderRadius.circular(15)),
+                return Card(
+                  elevation: 10,
+                  color: Theme.of(context).colorScheme.surfaceVariant,
                   child: Column(
                     children: [
-                      Image.network(
-                        viewModel.listAllPokemon[index].sprite,
+                      Image(
+                        image: CachedNetworkImageProvider(
+                            viewModel.listAllPokemon[index].sprite,
+                            maxWidth: 475,
+                            maxHeight: 475),
+                        loadingBuilder: ((context, child, progress) {
+                          if (progress == null) {
+                            return child;
+                          }
+                          return Center(
+                            child: SizedBox(
+                                child: Lottie.asset(
+                                    'assets/images/poke_loading.json')),
+                          );
+                        }),
                       ),
                       Text(viewModel.listAllPokemon[index].id),
                       Text(viewModel.listAllPokemon[index].name),
-                      Text(viewModel.listAllPokemon[index].type1 ?? ""),
-                      Text(viewModel.listAllPokemon[index].type2 ?? ""),
+                      TagWidget(
+                        textType: viewModel.listAllPokemon[index].type1 ?? "",
+                      ),
+                      TagWidget(
+                        textType: viewModel.listAllPokemon[index].type2 ?? "",
+                      ),
                     ],
                   ),
                 );
