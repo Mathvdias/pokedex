@@ -10,19 +10,18 @@ import '../service/repository/impl/pokemon_repository.dart';
 class PokemonViewModel extends ChangeNotifier {
   PokemonViewModel(this.repositoryPokemon, this.repositoryList);
 
-  var pokemonModel = PokemonModel();
-  var pokemomListCount = PokemonListModel();
   List<PokemonModel> listAllPokemon = <PokemonModel>[];
-
-  late final ScrollController scrollController;
-
-  final PokemonRepository repositoryPokemon;
-  final PokemonListRepository repositoryList;
-
-  int pageCount = 0;
+  final loading = ValueNotifier(true);
   int page1 = 1;
   int page2 = 12;
+  int pageCount = 0;
+  var pokemomListCount = PokemonListModel();
+  var pokemonModel = PokemonModel();
   int reasonMath = 12;
+  final PokemonListRepository repositoryList;
+  final PokemonRepository repositoryPokemon;
+  late final ScrollController scrollController;
+
   Future fetchList() async {
     try {
       pokemomListCount = await repositoryList.getAllPokemons(
@@ -30,27 +29,31 @@ class PokemonViewModel extends ChangeNotifier {
     } catch (e) {
       inspect(e);
     }
+
     notifyListeners();
   }
 
   Future fetchAll() async {
+    loading.value = true;
     fetchList();
-    try {
-      for (int index = page1; index < (page2 + 1); index++) {
+    for (int index = page1; index < (page2 + 1); index++) {
+      try {
         listAllPokemon.add(await repositoryPokemon.getPokemons(index));
+      } catch (e) {
+        inspect(e);
       }
-    } catch (e) {
-      inspect(e);
     }
     pageCount = pageCount + reasonMath;
     page1 = page1 + reasonMath;
     page2 = page2 + reasonMath;
+    loading.value = false;
     notifyListeners();
   }
 
   infiniteScrolling() {
     if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
+            scrollController.position.maxScrollExtent &&
+        !loading.value) {
       fetchAll();
     }
     notifyListeners();

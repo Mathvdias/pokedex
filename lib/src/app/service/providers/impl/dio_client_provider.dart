@@ -8,8 +8,8 @@ import '../http_client_interface.dart';
 class DioClient implements IRestClient {
   late Dio dio ;
   final options = BaseOptions(
-    connectTimeout: 1000,
-    receiveTimeout: 1000,
+    connectTimeout: 5000,
+    receiveTimeout: 5000,
   );
 
     DioClient.withAuthBasic() {

@@ -14,11 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Banner(
+          location: BannerLocation.topEnd,
+          message: 'Matheus Dias',
+          child: MyHomePage(title: 'PokeDex')),
     );
   }
 }
@@ -62,15 +67,30 @@ class _MyHomePageState extends State<MyHomePage> {
           child: AnimatedBuilder(
         animation: viewModel,
         builder: ((context, child) {
-          return ListView.builder(
-            controller: viewModel.scrollController,
-            itemBuilder: ((context, index) {
-              return Image.network(
-                viewModel.listAllPokemon[index].sprite,
-              );
-            }),
-            itemCount: viewModel.listAllPokemon.length,
-          );
+          return GridView.builder(
+              controller: viewModel.scrollController,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20),
+              itemCount: viewModel.listAllPokemon.length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Column(
+                    children: [
+                      Image.network(
+                        viewModel.listAllPokemon[index].sprite,
+                      ),
+                      Text(viewModel.listAllPokemon[index].id),
+                    ],
+                  ),
+                );
+              });
         }),
       )),
     );
