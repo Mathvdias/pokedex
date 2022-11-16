@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pokedex/src/app/pages/home/components/app_bar.dart';
 import '../../common/loading.dart';
 import '../../service/providers/impl/dio_client_provider.dart';
