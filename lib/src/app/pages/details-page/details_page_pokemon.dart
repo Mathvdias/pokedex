@@ -4,19 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'components/text_formatter_spec.dart';
 
 class DetailsPokemon extends StatefulWidget {
-  const DetailsPokemon(
-      {Key? key,
-      required this.id,
-      required this.image,
-      required this.name,
-      required this.type1,
-      required this.type2})
-      : super(key: key);
+  const DetailsPokemon({
+    Key? key,
+    required this.id,
+    required this.image,
+    required this.name,
+  }) : super(key: key);
   final String id;
   final String image;
   final String name;
-  final String type1;
-  final String type2;
+
   @override
   State<DetailsPokemon> createState() => _DetailsPokemonState();
 }

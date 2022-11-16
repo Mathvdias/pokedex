@@ -1,4 +1,4 @@
-class Pokemon {
+class PokemonDetailsModel {
   var id;
   var name;
   var sprite;
@@ -19,7 +19,7 @@ class Pokemon {
   var ability3;
   var moves;
 
-  Pokemon({
+  PokemonDetailsModel({
     this.id,
     this.name,
     this.sprite,
@@ -41,7 +41,7 @@ class Pokemon {
     this.moves,
   });
 
-  factory Pokemon.fromJson(
+  factory PokemonDetailsModel.fromJson(
       Map<String, dynamic> json, Map<String, dynamic> secJson) {
     String pokeId = json['id'].toString();
     int hp = json['stats'][0]['base_stat'];
@@ -76,7 +76,7 @@ class Pokemon {
       tempMovesList.add(moves);
     }
 
-    return Pokemon(
+    return PokemonDetailsModel(
       id: pokeId,
       name: json['name'],
       sprite: json['sprites']['front_default'],
