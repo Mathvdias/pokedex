@@ -3,28 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../viewmodels/pokemon_viewmodel.dart';
 import 'card_pokemon_details.dart';
 
-class CardPokemon extends StatelessWidget {
-  const CardPokemon({
-    Key? key,
-    required this.viewModel,
-  }) : super(key: key);
-
-  final PokemonViewModel viewModel;
-
-  @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    return AnimatedBuilder(
-      animation: viewModel,
-      builder: ((context, child) {
-        return PokemonListPokemonsGrid(width: width, viewModel: viewModel);
-      }),
-    );
-  }
-}
-
-class PokemonListPokemonsGrid extends StatelessWidget {
-  const PokemonListPokemonsGrid({
+class PokemonListGrid extends StatelessWidget {
+  const PokemonListGrid({
     Key? key,
     required this.width,
     required this.viewModel,
@@ -41,8 +21,6 @@ class PokemonListPokemonsGrid extends StatelessWidget {
         padding:
             EdgeInsets.symmetric(horizontal: width >= 1080 ? width / 4 : 0),
         child: GridView.builder(
-            shrinkWrap: true,
-            physics: const RangeMaintainingScrollPhysics(),
             controller: viewModel.scrollController,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,

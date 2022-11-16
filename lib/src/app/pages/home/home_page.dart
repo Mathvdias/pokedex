@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pokedex/src/app/pages/home/components/app_bar.dart';
 import '../../service/providers/impl/dio_client_provider.dart';
 import '../../service/repository/impl/pokemon_list_repository.dart';
@@ -39,8 +40,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarComponent(),
-      body: CardPokemon(viewModel: viewModel),
+      appBar: const AppBarComponent(),
+      body: AnimatedBuilder(
+        animation: viewModel.state,
+        builder: (context, child) {
+          return Stack(
+            alignment: AlignmentDirectional.bottomCenter,
+            children: [
+              CardPokemon(viewModel: viewModel),
+              Positioned(
+                bottom: 30,
+                child: Visibility(
+                  visible: viewModel.state.value == ResultState.loading
+                      ? true
+                      : false,
+                  child: Lottie.asset('assets/images/poke_loading.json',
+                      frameRate: FrameRate(120), height: 50, width: 50),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

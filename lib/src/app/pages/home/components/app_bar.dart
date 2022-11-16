@@ -21,8 +21,10 @@ class AppBarComponent extends StatelessWidget with PreferredSizeWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: height >= 1080 ? height / 3 : 16),
-            child: const CupertinoSearchTextField(),
+                horizontal: height >= 1080 ? height / 4 : 16),
+            child: const CupertinoSearchTextField(
+              placeholder: "Pesquise um pokémon",
+            ),
           ),
         ],
       ),
