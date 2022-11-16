@@ -14,11 +14,17 @@ class _DetailsPokemonState extends State<DetailsPokemon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Hero(
-          tag: 'imageHero',
-          child: Image.network(widget.image),
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: Hero(
+              tag: 'imageHero',
+              child: Image.network(widget.image),
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () => Navigator.pop(context), child: Text("voltar"))
+        ],
       ),
     );
   }
