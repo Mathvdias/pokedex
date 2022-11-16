@@ -11,8 +11,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter PokeDex',
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
         useMaterial3: true,
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const Banner(
           location: BannerLocation.topEnd,
