@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pokedex/src/app/pages/home/components/app_bar.dart';
+import '../../common/loading.dart';
 import '../../service/providers/impl/dio_client_provider.dart';
 import '../../service/repository/impl/pokemon_list_repository.dart';
 import '../../service/repository/impl/pokemon_repository.dart';
@@ -48,16 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               CardPokemon(viewModel: viewModel),
-              Positioned(
-                bottom: 30,
-                child: Visibility(
-                  visible: viewModel.state.value == ResultState.loading
-                      ? true
-                      : false,
-                  child: Lottie.asset('assets/images/poke_loading.json',
-                      frameRate: FrameRate(120), height: 50, width: 50),
-                ),
-              ),
+              Loading(viewModel: viewModel),
             ],
           );
         },
@@ -65,3 +57,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
