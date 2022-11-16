@@ -9,8 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter PokeDex',
+      title: 'PokeDex',
       theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
         useMaterial3: true,
         primarySwatch: Colors.blueGrey,
