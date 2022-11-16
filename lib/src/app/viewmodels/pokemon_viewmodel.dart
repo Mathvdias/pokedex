@@ -21,12 +21,15 @@ class PokemonViewModel extends ChangeNotifier {
   final PokemonListRepository repositoryList;
   final PokemonRepository repositoryPokemon;
   late final ScrollController scrollController;
-
+  final state = ValueNotifier(ResultState.start);
   Future fetchList() async {
+    state.value = ResultState.loading;
     try {
       pokemomListCount = await repositoryList.getAllPokemons(
           "https://pokeapi.co/api/v2/pokemon?limit=12&offset=$pageCount");
+      state.value = ResultState.success;
     } catch (e) {
+      state.value = ResultState.error;
       inspect(e);
     }
 
@@ -43,10 +46,12 @@ class PokemonViewModel extends ChangeNotifier {
         inspect(e);
       }
     }
+
     pageCount = pageCount + reasonMath;
     page1 = page1 + reasonMath;
     page2 = page2 + reasonMath;
     loading.value = false;
+
     notifyListeners();
   }
 
@@ -54,8 +59,11 @@ class PokemonViewModel extends ChangeNotifier {
     if (scrollController.position.pixels ==
             scrollController.position.maxScrollExtent &&
         !loading.value) {
+      state.value = ResultState.loading;
       fetchAll();
     }
     notifyListeners();
   }
 }
+
+enum ResultState { start, loading, success, error }
