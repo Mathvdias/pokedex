@@ -26,22 +26,25 @@ class ClickCardPokemon extends StatelessWidget {
       child: Column(
         children: [
           const Spacer(),
-          Image(
-            image: CachedNetworkImageProvider(
-                viewModel.listAllPokemon[index].sprite,
-                maxWidth: 150,
-                maxHeight: 150),
-            loadingBuilder: ((context, child, progress) {
-              if (progress == null) {
-                return child;
-              }
-              return Center(
-                child: SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: Lottie.asset('assets/images/poke_loading.json')),
-              );
-            }),
+          Hero(
+            tag: 'imageHero',
+            child: Image(
+              image: CachedNetworkImageProvider(
+                  viewModel.listAllPokemon[index].sprite,
+                  maxWidth: 150,
+                  maxHeight: 150),
+              loadingBuilder: ((context, child, progress) {
+                if (progress == null) {
+                  return child;
+                }
+                return Center(
+                  child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: Lottie.asset('assets/images/poke_loading.json')),
+                );
+              }),
+            ),
           ),
           const Spacer(
             flex: 1,
