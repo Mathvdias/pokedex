@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const Banner(
           location: BannerLocation.topEnd,
-          message: 'Matheus Dias',
+          message: 'Matheus',
           child: MyHomePage(title: 'PokeDex')),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../viewmodels/pokemon_viewmodel.dart';
+import '../../details-page/details_page_pokemon.dart';
 import 'click_card_pokemon_component.dart';
 
 class CardPokemonDetailComponent extends StatelessWidget {
@@ -26,9 +27,9 @@ class CardPokemonDetailComponent extends StatelessWidget {
         function: (() => Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Container(
-                      child: Text((index + 1).toString()),
-                    )))),
+                builder: (context) => DetailsPokemon(
+                  image: viewModel.listAllPokemon[index].sprite,
+                )))),
       ),
     );
   }
