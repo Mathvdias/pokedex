@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/src/app/service/providers/impl/dio_client_provider.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_repository.dart';
 import 'package:pokedex/src/app/viewmodels/pokemon_viewmodel.dart';
-import 'package:pokedex/src/moldels/details_page_model.dart';
+import 'package:pokedex/src/app/moldels/details_page_model.dart';
 import 'package:provider/provider.dart';
 
 import 'app/pages/details-page/details_page_pokemon.dart';

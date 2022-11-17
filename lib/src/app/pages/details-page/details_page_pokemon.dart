@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import '../../../moldels/details_page_model.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/text_formatter_spec.dart';
 
