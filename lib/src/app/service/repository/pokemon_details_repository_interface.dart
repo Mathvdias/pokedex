@@ -1,7 +1,5 @@
-
-
-import '../models/pokemon_details.dart';
+import '../models/pokemon_details_stats_model.dart';
 
 abstract class IPokemonDetailsRepository {
-  Future<PokemonDetailsModel> getPokemonDetail(int id);
+  Future<PokemonDetailStatsModel> getPokemonDetail(String id);
 }

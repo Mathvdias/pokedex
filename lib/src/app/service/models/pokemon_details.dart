@@ -1,103 +1,68 @@
-class PokemonDetailsModel {
-  var id;
-  var name;
-  var sprite;
-  var type1;
-  var type2;
-  var hp;
-  var attack;
-  var defense;
-  var speed;
-  var spAttack;
-  var spDefense;
-  var description;
-  var height;
-  var weight;
-  var species;
-  var ability1;
-  var ability2;
-  var ability3;
-  var moves;
-
-  PokemonDetailsModel({
+class PokemonDetailModel {
+  PokemonDetailModel({
+    this.baseHappiness,
+    this.captureRate,
+    this.flavorTextEntries,
+    this.genera,
+    this.hasGenderDifferences,
+    this.hatchCounter,
     this.id,
     this.name,
-    this.sprite,
-    this.type1,
-    this.type2,
-    this.hp,
-    this.attack,
-    this.defense,
-    this.speed,
-    this.spAttack,
-    this.spDefense,
-    this.description,
-    this.height,
-    this.weight,
-    this.species,
-    this.ability1,
-    this.ability2,
-    this.ability3,
-    this.moves,
+    this.order,
   });
 
-  factory PokemonDetailsModel.fromJson(
-      Map<String, dynamic> json, Map<String, dynamic> secJson) {
-    String pokeId = json['id'].toString();
-    int hp = json['stats'][0]['base_stat'];
-    int attack = json['stats'][1]['base_stat'];
-    int defense = json['stats'][2]['base_stat'];
-    int spAttack = json['stats'][3]['base_stat'];
-    int spDefense = json['stats'][4]['base_stat'];
-    int speed = json['stats'][5]['base_stat'];
-    // need to find more effective way to access flavor text
-    List descList = secJson['flavor_text_entries'];
-    int descIndex;
-    for (int i = 0; i < descList.length; i++) {
-      var desc = secJson['flavor_text_entries'][i]['language']['name'];
-      if (desc == 'en') {
-        descIndex = i;
-      }
-    }
-    String pokeDesc = secJson['flavor_text_entries']['en']['flavor_text'];
-    String pokeSpec = secJson['genera'][7]['genus'];
-    double pokeHp = hp / 100;
-    double pokeAttack = attack / 100;
-    double pokeDef = defense / 100;
-    double pokeSpAttack = spAttack / 100;
-    double pokespDefense = spDefense / 100;
-    double pokeSpeed = speed / 100;
-    List abilities = json['abilities'];
-    List types = json['types'];
-    List movesList = json['moves'];
-    List tempMovesList = [];
-    for (int i = 0; i < movesList.length; i++) {
-      var moves = json['moves'][i]['move']['name'];
-      tempMovesList.add(moves);
+  PokemonDetailModel.fromJson(Map<String, dynamic> json) {
+    baseHappiness = json['base_happiness'];
+    captureRate = json['capture_rate'];
+    if (json['flavor_text_entries'] != null) {
+      flavorTextEntries = <FlavorTextEntries>[];
+      json['flavor_text_entries'].forEach((v) {
+        flavorTextEntries!.add(FlavorTextEntries.fromJson(v));
+      });
     }
 
-    return PokemonDetailsModel(
-      id: pokeId,
-      name: json['name'],
-      sprite: json['sprites']['front_default'],
-      type1: json['types'][0]['type']['name'],
-      type2: types.length == 2 ? json['types'][1]['type']['name'] : null,
-      hp: pokeHp,
-      attack: pokeAttack,
-      defense: pokeDef,
-      speed: pokeSpeed,
-      spAttack: pokeSpAttack,
-      spDefense: pokespDefense,
-      description: pokeDesc,
-      height: json['height'],
-      weight: json['weight'],
-      species: pokeSpec,
-      ability1: json['abilities'][0]['ability']['name'],
-      ability2:
-          abilities.length >= 2 ? json['abilities'][1]['ability']['name'] : '',
-      ability3:
-          abilities.length >= 3 ? json['abilities'][2]['ability']['name'] : '',
-      moves: tempMovesList,
-    );
+    if (json['genera'] != null) {
+      genera = <Genera>[];
+      json['genera'].forEach((v) {
+        genera!.add(Genera.fromJson(v));
+      });
+    }
+    hasGenderDifferences = json['has_gender_differences'];
+    hatchCounter = json['hatch_counter'];
+    id = json['id'];
+    isLegendary = json['is_legendary'];
+    name = json['name'];
+    order = json['order'];
   }
+
+  int? baseHappiness;
+  int? captureRate;
+  List<FlavorTextEntries>? flavorTextEntries;
+  List<Genera>? genera;
+  bool? hasGenderDifferences;
+  int? hatchCounter;
+  int? id;
+  bool? isBaby;
+  bool? isLegendary;
+  String? name;
+  int? order;
+}
+class FlavorTextEntries {
+  FlavorTextEntries({this.flavorText});
+
+  FlavorTextEntries.fromJson(Map<String, dynamic> json) {
+    flavorText = json['flavor_text'];
+  }
+
+  String? flavorText;
+}
+
+class Genera {
+  Genera({this.genus});
+
+  Genera.fromJson(Map<String, dynamic> json) {
+    genus = json['genus'];
+  }
+
+  String? genus;
 }
