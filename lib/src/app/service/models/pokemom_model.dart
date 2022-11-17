@@ -5,6 +5,8 @@ class PokemonModel {
   var type1;
   var type2;
   var imagelow;
+  var height;
+  var weight;
 
   PokemonModel({
     this.id,
@@ -13,6 +15,8 @@ class PokemonModel {
     this.type1,
     this.type2,
     this.imagelow,
+    this.height,
+    this.weight,
   });
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,8 @@ class PokemonModel {
         type1: json['types'][0]['type']['name'],
         type2: null,
         imagelow: json['sprites']['front_default'],
+        height: json['height'],
+        weight: json['weight'],
       );
     } else {
       return PokemonModel(
@@ -35,6 +41,8 @@ class PokemonModel {
         type1: json['types'][0]['type']['name'],
         type2: json['types'][1]['type']['name'],
         imagelow: json['sprites']['front_default'],
+        height: json['height'],
+        weight: json['weight'],
       );
     }
   }

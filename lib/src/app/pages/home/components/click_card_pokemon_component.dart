@@ -27,7 +27,7 @@ class ClickCardPokemon extends StatelessWidget {
         children: [
           const Spacer(),
           Hero(
-            tag: 'imageHero',
+            tag: 'imageHero: ${viewModel.listAllPokemon[index].id}',
             child: Image(
               image: CachedNetworkImageProvider(
                   viewModel.listAllPokemon[index].sprite,

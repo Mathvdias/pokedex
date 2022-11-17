@@ -28,8 +28,11 @@ class CardPokemonDetailComponent extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => DetailsPokemon(
-                  image: viewModel.listAllPokemon[index].sprite,
-                )))),
+                      image: viewModel.listAllPokemon[index].sprite,
+                      id: viewModel.listAllPokemon[index].id,
+                      name: viewModel.listAllPokemon[index].name,
+
+                    )))),
       ),
     );
   }
