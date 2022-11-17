@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pokedex/src/app/pages/home/components/search_bar_component.dart';
 
 class AppBarComponent extends StatelessWidget with PreferredSizeWidget {
   const AppBarComponent({Key? key}) : super(key: key);
@@ -22,9 +22,7 @@ class AppBarComponent extends StatelessWidget with PreferredSizeWidget {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: height >= 1080 ? height / 4 : 16),
-            child: const CupertinoSearchTextField(
-              placeholder: "Pesquise um pokémon",
-            ),
+            child: const SearchBarComponent(),
           ),
         ],
       ),

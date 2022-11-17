@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pokedex/src/app/service/models/pokemon_details_stats_model.dart';
 import 'package:pokedex/src/app/service/providers/impl/dio_client_provider.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_details_repository.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_request_details_repository.dart';
@@ -21,5 +22,10 @@ void main() {
     await apiViewModel.fetchDetails('4');
     expect(apiViewModel.pokemonDetails.flavorTextEntries![10].flavorText,
         "It has a preference for hot things.\nWhen it rains, steam is said to spout from\nthe tip of its tail.");
+  });
+  test('Teste Category pokemon image', () async {
+    await apiViewModel.fetchPokemonDetail('4');
+    expect(apiViewModel.pokemonDetailsStats.sprites!.other!.officialArtwork,
+        isA<PokemonDetailStatsModel>());
   });
 }
