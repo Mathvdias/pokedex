@@ -84,8 +84,8 @@ class Ability {
   Ability({this.name, this.url});
 
   Ability.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
+    name = json['name'] ?? '';
+    url = json['url'] ?? '';
   }
 
   String? name;

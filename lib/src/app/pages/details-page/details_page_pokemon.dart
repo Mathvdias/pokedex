@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:provider/provider.dart';
 
+import '../../../moldels/details_page_model.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/text_formatter_spec.dart';
 
 class DetailsPokemon extends StatefulWidget {
-  static const routeName = '/detailScreen';
+  static const routeName = '/details';
   const DetailsPokemon({
     Key? key,
     required this.id,
@@ -19,7 +19,6 @@ class DetailsPokemon extends StatefulWidget {
   final String id;
   final String image;
   final String name;
-
   @override
   State<DetailsPokemon> createState() => _DetailsPokemonState();
 }
@@ -27,14 +26,17 @@ class DetailsPokemon extends StatefulWidget {
 class _DetailsPokemonState extends State<DetailsPokemon>
     with TickerProviderStateMixin {
   TabController? controller;
-
-  //var _isInit = true;
-/*  void didChangeDependencies() {
+  /*  var _isInit = true;
+ @override
+  void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      final pokeId = ModalRoute.of(context).settings.arguments as String;
-      Provider.of<PokeProvider>(context, listen: false)
-          .getPokeData(pokeId)
+      final pokeId = ModalRoute.of(context)?.settings.arguments;
+      Provider.of<PokemonDetailViewModel>(context, listen: false)
+          .fetchDetails(pokeId.toString())
+          .then((_) {});
+      Provider.of<PokemonDetailViewModel>(context, listen: false)
+          .fetchPokemonDetail(pokeId.toString())
           .then((_) {});
     }
     _isInit = false;
@@ -49,6 +51,12 @@ class _DetailsPokemonState extends State<DetailsPokemon>
   }
 
   @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<PokemonDetailViewModel>();
     return Scaffold(
@@ -58,7 +66,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.name,
+              toBeginningOfSentenceCase(widget.name)!,
               style: GoogleFonts.poppins(),
             ),
             const SizedBox(
@@ -142,12 +150,14 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             children: [
               Text(
                 toBeginningOfSentenceCase(
-                    viewModel.pokemonDetails.flavorTextEntries![9].flavorText)!,
+                    viewModel.pokemonDetails.flavorTextEntries![9].flavorText ??
+                        '')!,
                 style: GoogleFonts.poppins(),
               ),
               Text(
                 toBeginningOfSentenceCase(viewModel
-                    .pokemonDetails.flavorTextEntries![10].flavorText)!,
+                        .pokemonDetails.flavorTextEntries![10].flavorText ??
+                    '')!,
                 style: GoogleFonts.poppins(),
               )
             ],
@@ -168,6 +178,8 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormatterSpecs(
                     text:
@@ -186,6 +198,8 @@ class _DetailsPokemonState extends State<DetailsPokemon>
                 ],
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormatterSpecs(
                     text: toBeginningOfSentenceCase(
@@ -193,8 +207,8 @@ class _DetailsPokemonState extends State<DetailsPokemon>
                     description: 'Category',
                   ),
                   TextFormatterSpecs(
-                    text:
-                        '${toBeginningOfSentenceCase(viewModel.pokemonDetailsStats.abilities![0].ability!.name)!}\n${toBeginningOfSentenceCase(viewModel.pokemonDetailsStats.abilities![1].ability!.name)!}',
+                    text: toBeginningOfSentenceCase(viewModel
+                        .pokemonDetailsStats.abilities?[0].ability!.name)!,
                     description: 'Abilities',
                   ),
                 ],
@@ -220,11 +234,5 @@ class _DetailsPokemonState extends State<DetailsPokemon>
   String convertValue(value) {
     double convertedValue = value / 10;
     return convertedValue.toString();
-  }
-
-  @override
-  void dispose() {
-    controller!.dispose();
-    super.dispose();
   }
 }

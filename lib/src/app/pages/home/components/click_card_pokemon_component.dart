@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../common/tag.dart';
@@ -55,7 +56,7 @@ class ClickCardPokemon extends StatelessWidget {
                 fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w500),
           ),
           Text(
-            viewModel.listAllPokemon[index].name,
+            toBeginningOfSentenceCase(viewModel.listAllPokemon[index].name)!,
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.w500,

@@ -23,7 +23,7 @@ class TextFormatterSpecs extends StatelessWidget {
             style: GoogleFonts.poppins(color: Colors.white),
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           Text(
             text,
