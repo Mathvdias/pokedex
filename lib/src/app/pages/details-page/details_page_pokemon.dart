@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/text_formatter_spec.dart';
+import 'components/text_list_formatter.dart';
 
 class DetailsPokemon extends StatefulWidget {
   static const routeName = '/detailScreen';
@@ -49,6 +50,12 @@ class _DetailsPokemonState extends State<DetailsPokemon>
   }
 
   @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<PokemonDetailViewModel>();
     return Scaffold(
@@ -58,7 +65,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.name,
+              toBeginningOfSentenceCase(widget.name)!,
               style: GoogleFonts.poppins(),
             ),
             const SizedBox(
@@ -142,12 +149,14 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             children: [
               Text(
                 toBeginningOfSentenceCase(
-                    viewModel.pokemonDetails.flavorTextEntries![9].flavorText)!,
+                    viewModel.pokemonDetails.flavorTextEntries![9].flavorText ??
+                        '')!,
                 style: GoogleFonts.poppins(),
               ),
               Text(
                 toBeginningOfSentenceCase(viewModel
-                    .pokemonDetails.flavorTextEntries![10].flavorText)!,
+                        .pokemonDetails.flavorTextEntries![10].flavorText ??
+                    '')!,
                 style: GoogleFonts.poppins(),
               )
             ],
@@ -186,6 +195,8 @@ class _DetailsPokemonState extends State<DetailsPokemon>
                 ],
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormatterSpecs(
                     text: toBeginningOfSentenceCase(
@@ -193,8 +204,8 @@ class _DetailsPokemonState extends State<DetailsPokemon>
                     description: 'Category',
                   ),
                   TextFormatterSpecs(
-                    text:
-                        '${toBeginningOfSentenceCase(viewModel.pokemonDetailsStats.abilities![0].ability!.name)!}\n${toBeginningOfSentenceCase(viewModel.pokemonDetailsStats.abilities![1].ability!.name)!}',
+                    text: toBeginningOfSentenceCase(viewModel
+                        .pokemonDetailsStats.abilities?[0].ability!.name)!,
                     description: 'Abilities',
                   ),
                 ],
@@ -220,11 +231,5 @@ class _DetailsPokemonState extends State<DetailsPokemon>
   String convertValue(value) {
     double convertedValue = value / 10;
     return convertedValue.toString();
-  }
-
-  @override
-  void dispose() {
-    controller!.dispose();
-    super.dispose();
   }
 }
