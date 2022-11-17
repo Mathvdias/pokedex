@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../details-page/details_page_pokemon.dart';
+
 class SearchBarComponent extends StatefulWidget {
   const SearchBarComponent({super.key});
 
@@ -22,8 +24,11 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
       controller: _textController,
       onSubmitted: (value) {
         if (value.isNotEmpty) {
-          // Navigator.of(context)
-          //     .pushNamed(PokeDetailScreen.routeName, arguments: value);
+          Navigator.pushNamed(
+            context,
+            DetailsPokemon.routeName,
+            arguments: value,
+          );
         }
       },
       placeholder: "Pesquise um pokémon",

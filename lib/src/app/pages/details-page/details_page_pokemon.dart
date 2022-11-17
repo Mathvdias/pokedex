@@ -4,16 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import '../../moldels/details_page_model.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/text_formatter_spec.dart';
 
 class DetailsPokemon extends StatefulWidget {
+  static const routeName = '/details';
   const DetailsPokemon({
     Key? key,
   }) : super(key: key);
-
-  static const routeName = '/details';
 
   @override
   State<DetailsPokemon> createState() => _DetailsPokemonState();
@@ -27,13 +25,12 @@ class _DetailsPokemonState extends State<DetailsPokemon>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      final pokeId =
-          ModalRoute.of(context)?.settings.arguments as DetailsPageArguments;
+      final pokeId = ModalRoute.of(context)?.settings.arguments as String;
       Provider.of<PokemonDetailViewModel>(context, listen: false)
-          .fetchDetails(pokeId.id)
+          .fetchDetails(pokeId)
           .then((_) {});
       Provider.of<PokemonDetailViewModel>(context, listen: false)
-          .fetchPokemonDetail(pokeId.id)
+          .fetchPokemonDetail(pokeId)
           .then((_) {});
     }
     _isInit = false;
@@ -68,108 +65,14 @@ class _DetailsPokemonState extends State<DetailsPokemon>
   }
 
   _error() {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as DetailsPageArguments;
+    final pokeId = ModalRoute.of(context)?.settings.arguments as String;
     final viewModel = context.watch<PokemonDetailViewModel>();
     return ElevatedButton(
-        onPressed: () => viewModel.fetchPokemonDetail(args.id),
+        onPressed: () => viewModel.fetchPokemonDetail(pokeId),
         child: const Text("Erro"));
   }
 
   _success() {
-    final viewModel = context.watch<PokemonDetailViewModel>();
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 4,
-          height: 100,
-          child: PageView(
-            onPageChanged: (value) {
-              controller!.index = value;
-            },
-            children: [
-              Text(
-                toBeginningOfSentenceCase(
-                    viewModel.pokemonDetails.flavorTextEntries![9].flavorText ??
-                        '')!,
-                style: GoogleFonts.poppins(),
-              ),
-              Text(
-                toBeginningOfSentenceCase(viewModel
-                        .pokemonDetails.flavorTextEntries![10].flavorText ??
-                    '')!,
-                style: GoogleFonts.poppins(),
-              )
-            ],
-          ),
-        ),
-        Card(
-          elevation: 10,
-          color: const Color(0xFF6390F0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormatterSpecs(
-                    text:
-                        "${convertValue(viewModel.pokemonDetailsStats.height)} m",
-                    description: 'Height',
-                  ),
-                  TextFormatterSpecs(
-                    text:
-                        "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
-                    description: 'Weight',
-                  ),
-                  const TextFormatterSpecs(
-                    text: ' ♂ ♀ ',
-                    description: 'Gender',
-                  )
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormatterSpecs(
-                    text: toBeginningOfSentenceCase(
-                        viewModel.pokemonDetails.species)!,
-                    description: 'Category',
-                  ),
-                  TextFormatterSpecs(
-                    text: toBeginningOfSentenceCase(viewModel
-                        .pokemonDetailsStats.abilities?[0].ability!.name)!,
-                    description: 'Abilities',
-                  ),
-                ],
-              )
-            ],
-          ),
-        )
-      ],
-    );
-  }
-
-  _loading() {
-    return Center(
-      child: Lottie.asset('assets/images/poke_loading.json',
-          frameRate: FrameRate(120), height: 50, width: 50),
-    );
-  }
-
-  _start() {
-    return Container();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as DetailsPageArguments;
     final viewModel = context.watch<PokemonDetailViewModel>();
     return Scaffold(
       appBar: AppBar(
@@ -178,14 +81,14 @@ class _DetailsPokemonState extends State<DetailsPokemon>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              toBeginningOfSentenceCase(args.name)!,
+              toBeginningOfSentenceCase(viewModel.pokemonDetails.name)!,
               style: GoogleFonts.poppins(),
             ),
             const SizedBox(
               width: 10,
             ),
             Text(
-              "N° ${args.id}",
+              "N° ${viewModel.pokemonDetails.id}",
               style: GoogleFonts.poppins(color: Colors.grey[600]),
             )
           ],
@@ -202,23 +105,119 @@ class _DetailsPokemonState extends State<DetailsPokemon>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Hero(
-                        tag: 'imageHero: ${args.id}',
-                        child: Image.network(args.image),
+                        tag: 'imageHero: ${viewModel.pokemonDetails.id}',
+                        child: Image.network(viewModel.pokemonDetailsStats
+                            .sprites!.other!.officialArtwork!.frontDefault
+                            .toString()),
                       ),
                     ]),
               ),
               Expanded(
                   flex: 1,
-                  child: AnimatedBuilder(
-                    animation: viewModel.state,
-                    builder: (context, child) {
-                      return stateManagement(viewModel.state.value);
-                    },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 4,
+                        height: 100,
+                        child: PageView(
+                          onPageChanged: (value) {
+                            controller!.index = value;
+                          },
+                          children: [
+                            Text(
+                              toBeginningOfSentenceCase(viewModel.pokemonDetails
+                                      .flavorTextEntries![9].flavorText ??
+                                  '')!,
+                              style: GoogleFonts.poppins(),
+                            ),
+                            Text(
+                              toBeginningOfSentenceCase(viewModel.pokemonDetails
+                                      .flavorTextEntries![10].flavorText ??
+                                  '')!,
+                              style: GoogleFonts.poppins(),
+                            )
+                          ],
+                        ),
+                      ),
+                      Card(
+                        elevation: 10,
+                        color: const Color(0xFF6390F0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextFormatterSpecs(
+                                  text:
+                                      "${convertValue(viewModel.pokemonDetailsStats.height)} m",
+                                  description: 'Height',
+                                ),
+                                TextFormatterSpecs(
+                                  text:
+                                      "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
+                                  description: 'Weight',
+                                ),
+                                const TextFormatterSpecs(
+                                  text: ' ♂ ♀ ',
+                                  description: 'Gender',
+                                )
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextFormatterSpecs(
+                                  text: toBeginningOfSentenceCase(
+                                      viewModel.pokemonDetails.species)!,
+                                  description: 'Category',
+                                ),
+                                TextFormatterSpecs(
+                                  text: toBeginningOfSentenceCase(viewModel
+                                      .pokemonDetailsStats
+                                      .abilities?[0]
+                                      .ability!
+                                      .name)!,
+                                  description: 'Abilities',
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ))
             ],
           ),
         ],
       ),
+    );
+  }
+
+  _loading() {
+    return Center(
+      child: Lottie.asset('assets/images/poke_loading.json',
+          frameRate: FrameRate(120), height: 50, width: 50),
+    );
+  }
+
+  _start() {
+    return Container();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = context.watch<PokemonDetailViewModel>();
+    return AnimatedBuilder(
+      animation: viewModel.state,
+      builder: (context, child) {
+        return stateManagement(viewModel.state.value);
+      },
     );
   }
 }

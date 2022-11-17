@@ -62,11 +62,14 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             primarySwatch: Colors.blueGrey,
           ),
-          home: const Banner(
-              location: BannerLocation.topEnd,
-              message: 'Matheus',
-              child: MyHomePage(title: 'PokeDex')),
+          initialRoute: '/',
           routes: {
+            '/': (_) {
+              return const Banner(
+                  location: BannerLocation.topEnd,
+                  message: 'Matheus',
+                  child: MyHomePage(title: 'PokeDex'));
+            },
             DetailsPokemon.routeName: (context) => const DetailsPokemon(),
           },
         ));

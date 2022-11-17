@@ -46,7 +46,6 @@ class PokemonViewModel extends ChangeNotifier {
         inspect(e);
       }
     }
-
     pageCount = pageCount + reasonMath;
     page1 = page1 + reasonMath;
     page2 = page2 + reasonMath;
