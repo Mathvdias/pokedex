@@ -1,0 +1,18 @@
+import 'package:pokedex/src/app/service/models/pokemon_details.dart';
+
+import '../../providers/http_client_interface.dart';
+import '../pokemon_request_details_repository_interface.dart';
+
+class PokemonDetails implements IPokemonDetailsRequestRepository {
+  PokemonDetails(this.client);
+
+  final IRestClient client;
+
+  @override
+  Future<PokemonDetailModel> getPokemonDetail(String id) async {
+    var json =
+        await client.get('https://pokeapi.co/api/v2/pokemon-species/$id');
+
+    return PokemonDetailModel.fromJson(json);
+  }
+}

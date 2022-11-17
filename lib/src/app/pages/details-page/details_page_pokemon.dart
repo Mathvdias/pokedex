@@ -26,7 +26,7 @@ class DetailsPokemon extends StatefulWidget {
 
 class _DetailsPokemonState extends State<DetailsPokemon> {
   final viewModel = PokemonDetailViewModel(
-      PokemonDetailsRepository(DioClient.withAuthBasic()));
+      PokemonDetailsStatsRepository(DioClient.withAuthBasic()));
   //var _isInit = true;
 /*  void didChangeDependencies() {
     super.didChangeDependencies();

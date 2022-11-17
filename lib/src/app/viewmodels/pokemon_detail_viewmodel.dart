@@ -6,7 +6,7 @@ import '../service/models/pokemon_details_stats_model.dart';
 import '../service/repository/impl/pokemon_details_repository.dart';
 
 class PokemonDetailViewModel extends ChangeNotifier {
-  final PokemonDetailsRepository repository;
+  final PokemonDetailsStatsRepository repository;
 
   PokemonDetailViewModel(this.repository);
 
