@@ -3,7 +3,7 @@ class PokemonDetailModel {
     this.baseHappiness,
     this.captureRate,
     this.flavorTextEntries,
-    this.genera,
+    this.species,
     this.hasGenderDifferences,
     this.hatchCounter,
     this.id,
@@ -20,13 +20,7 @@ class PokemonDetailModel {
         flavorTextEntries!.add(FlavorTextEntries.fromJson(v));
       });
     }
-
-    if (json['genera'] != null) {
-      genera = <Genera>[];
-      json['genera'].forEach((v) {
-        genera!.add(Genera.fromJson(v));
-      });
-    }
+    species = json['genera'][7]['genus'] ?? '';
     hasGenderDifferences = json['has_gender_differences'];
     hatchCounter = json['hatch_counter'];
     id = json['id'];
@@ -38,7 +32,7 @@ class PokemonDetailModel {
   int? baseHappiness;
   int? captureRate;
   List<FlavorTextEntries>? flavorTextEntries;
-  List<Genera>? genera;
+  String? species;
   bool? hasGenderDifferences;
   int? hatchCounter;
   int? id;
@@ -47,6 +41,7 @@ class PokemonDetailModel {
   String? name;
   int? order;
 }
+
 class FlavorTextEntries {
   FlavorTextEntries({this.flavorText});
 
@@ -55,14 +50,4 @@ class FlavorTextEntries {
   }
 
   String? flavorText;
-}
-
-class Genera {
-  Genera({this.genus});
-
-  Genera.fromJson(Map<String, dynamic> json) {
-    genus = json['genus'];
-  }
-
-  String? genus;
 }

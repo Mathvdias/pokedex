@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/src/app/pages/home/components/app_bar.dart';
+import 'package:provider/provider.dart';
 import '../../common/loading.dart';
-import '../../service/providers/impl/dio_client_provider.dart';
-import '../../service/repository/impl/pokemon_list_repository.dart';
-import '../../service/repository/impl/pokemon_repository.dart';
 import '../../viewmodels/pokemon_viewmodel.dart';
 import 'components/card_pokemon_component.dart';
 
@@ -17,18 +15,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final viewModel = PokemonViewModel(
-      PokemonRepository(DioClient.withAuthBasic()),
-      PokemonListRepository(DioClient.withAuthBasic()));
-
-  @override
-  void dispose() {
-    viewModel.scrollController.dispose();
-    super.dispose();
-  }
-
   @override
   void initState() {
+    final viewModel = context.read<PokemonViewModel>();
     viewModel.fetchAll();
     viewModel.scrollController = ScrollController();
     viewModel.scrollController.addListener(() {
@@ -39,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<PokemonViewModel>();
     return Scaffold(
       appBar: const AppBarComponent(),
       body: AnimatedBuilder(
@@ -55,6 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    final viewModel = context.read<PokemonViewModel>();
+    viewModel.scrollController.dispose();
+    super.dispose();
+  }
 }
-
-
