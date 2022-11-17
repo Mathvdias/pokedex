@@ -5,3 +5,4 @@ class DetailsPageArguments {
 
   DetailsPageArguments(this.id, this.image, this.name);
 }
+//routes named to do
