@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../moldels/details_page_model.dart';
 import '../../../viewmodels/pokemon_viewmodel.dart';
 import '../../details-page/details_page_pokemon.dart';
 import 'click_card_pokemon_component.dart';
@@ -11,8 +12,8 @@ class CardPokemonDetailComponent extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-  final PokemonViewModel viewModel;
   final int index;
+  final PokemonViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +25,14 @@ class CardPokemonDetailComponent extends StatelessWidget {
       child: ClickCardPokemon(
         viewModel: viewModel,
         index: index,
-        function: (() => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailsPokemon(
-                      image: viewModel.listAllPokemon[index].sprite,
-                      id: viewModel.listAllPokemon[index].id,
-                      name: viewModel.listAllPokemon[index].name,
-
-                    )))),
+        function: (() => Navigator.pushNamed(
+              context,
+              DetailsPokemon.routeName,
+              arguments: DetailsPageArguments(
+                  viewModel.listAllPokemon[index].id,
+                  viewModel.listAllPokemon[index].sprite,
+                  viewModel.listAllPokemon[index].name),
+            )),
       ),
     );
   }

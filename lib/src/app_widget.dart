@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/src/app/service/providers/impl/dio_client_provider.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_repository.dart';
 import 'package:pokedex/src/app/viewmodels/pokemon_viewmodel.dart';
-import 'package:pokedex/src/app/moldels/details_page_model.dart';
 import 'package:provider/provider.dart';
 
 import 'app/pages/details-page/details_page_pokemon.dart';
 import 'app/pages/home/home_page.dart';
+
 import 'app/service/repository/impl/pokemon_details_repository.dart';
 import 'app/service/repository/impl/pokemon_list_repository.dart';
 import 'app/service/repository/impl/pokemon_request_details_repository.dart';
@@ -21,14 +21,25 @@ class MyApp extends StatelessWidget {
         providers: [
           //  Provider(create: (_) => DioClient.withAuthBasic()),
           Provider(
-              create: (_) =>
-                  PokemonDetailsRepository(DioClient.withAuthBasic())),
-          Provider(create: (_) => PokemonRepository(DioClient.withAuthBasic())),
+            create: (_) => PokemonDetailsRepository(
+              DioClient.withAuthBasic(),
+            ),
+          ),
           Provider(
-              create: (_) => PokemonListRepository(DioClient.withAuthBasic())),
+            create: (_) => PokemonRepository(
+              DioClient.withAuthBasic(),
+            ),
+          ),
           Provider(
-              create: (context) =>
-                  PokemonDetailsStatsRepository(DioClient.withAuthBasic())),
+            create: (_) => PokemonListRepository(
+              DioClient.withAuthBasic(),
+            ),
+          ),
+          Provider(
+            create: (context) => PokemonDetailsStatsRepository(
+              DioClient.withAuthBasic(),
+            ),
+          ),
           ChangeNotifierProvider(
             create: (context) => PokemonViewModel(
               context.read(),
@@ -40,7 +51,7 @@ class MyApp extends StatelessWidget {
               context.read(),
               context.read(),
             ),
-          )
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -55,7 +66,9 @@ class MyApp extends StatelessWidget {
               location: BannerLocation.topEnd,
               message: 'Matheus',
               child: MyHomePage(title: 'PokeDex')),
-          routes: {},
+          routes: {
+            DetailsPokemon.routeName: (context) => const DetailsPokemon(),
+          },
         ));
   }
 }

@@ -22,7 +22,8 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
       controller: _textController,
       onSubmitted: (value) {
         if (value.isNotEmpty) {
-          // Navigator.of(context).pushNamed();
+          // Navigator.of(context)
+          //     .pushNamed(PokeDetailScreen.routeName, arguments: value);
         }
       },
       placeholder: "Pesquise um pokémon",
