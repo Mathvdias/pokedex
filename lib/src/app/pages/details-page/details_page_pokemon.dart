@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:provider/provider.dart';
 
+import '../../../moldels/details_page_model.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/text_formatter_spec.dart';
-import 'components/text_list_formatter.dart';
 
 class DetailsPokemon extends StatefulWidget {
-  static const routeName = '/detailScreen';
+  static const routeName = '/details';
   const DetailsPokemon({
     Key? key,
     required this.id,
@@ -20,7 +19,6 @@ class DetailsPokemon extends StatefulWidget {
   final String id;
   final String image;
   final String name;
-
   @override
   State<DetailsPokemon> createState() => _DetailsPokemonState();
 }
@@ -28,14 +26,17 @@ class DetailsPokemon extends StatefulWidget {
 class _DetailsPokemonState extends State<DetailsPokemon>
     with TickerProviderStateMixin {
   TabController? controller;
-
-  //var _isInit = true;
-/*  void didChangeDependencies() {
+  /*  var _isInit = true;
+ @override
+  void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      final pokeId = ModalRoute.of(context).settings.arguments as String;
-      Provider.of<PokeProvider>(context, listen: false)
-          .getPokeData(pokeId)
+      final pokeId = ModalRoute.of(context)?.settings.arguments;
+      Provider.of<PokemonDetailViewModel>(context, listen: false)
+          .fetchDetails(pokeId.toString())
+          .then((_) {});
+      Provider.of<PokemonDetailViewModel>(context, listen: false)
+          .fetchPokemonDetail(pokeId.toString())
           .then((_) {});
     }
     _isInit = false;
@@ -177,6 +178,8 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormatterSpecs(
                     text:
