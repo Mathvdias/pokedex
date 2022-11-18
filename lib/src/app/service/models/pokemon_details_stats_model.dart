@@ -8,9 +8,8 @@ class PokemonDetailStatsModel {
     this.order,
     this.sprites,
     this.stats,
-    this.types,
-    this.type1,
-    this.type2,
+    this.type1 = '',
+    this.type2 = '',
     this.weight,
   });
 
@@ -44,14 +43,8 @@ class PokemonDetailStatsModel {
         stats!.add(Stats.fromJson(v));
       });
     }
-    if (json['types'] != null) {
-      types = <Types>[];
-      json['types'].forEach((v) {
-        types!.add(Types.fromJson(v));
-      });
-    }
-    type1 = json['types'][0]['type']['name'];
-    type2 = json['types'][1]['type']['name'];
+    type1 = json['types'][0]['type']['name'] ?? "";
+    type2 = json['types'][1]['type']['name'] ?? "";
     weight = json['weight'] ?? "";
   }
 
@@ -66,9 +59,8 @@ class PokemonDetailStatsModel {
   int? order;
   Sprites? sprites;
   List<Stats>? stats;
-  List<Types>? types;
-  var type1;
-  var type2;
+  String? type1;
+  String? type2;
   int? weight;
 }
 
@@ -544,16 +536,4 @@ class Stats {
   int? baseStat;
   int? effort;
   Ability? stat;
-}
-
-class Types {
-  Types({this.slot, this.type});
-
-  Types.fromJson(Map<String, dynamic> json) {
-    slot = json['slot'];
-    type = json['type'] != null ? Ability.fromJson(json['type']) : null;
-  }
-
-  int? slot;
-  Ability? type;
 }

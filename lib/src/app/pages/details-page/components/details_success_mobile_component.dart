@@ -51,8 +51,7 @@ class DetailsSuccessMobile extends StatelessWidget {
             ],
           ),
           Card(
-            color: colorTag(
-                viewModel.pokemonDetailsStats.types![0].type!.name.toString()),
+            color: colorTag(viewModel.pokemonDetailsStats.type1.toString()),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,9 +124,8 @@ class DetailsSuccessMobile extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
-                      color: colorTag(
-                          viewModel.pokemonDetailsStats.types?[0].type?.name ??
-                              ''),
+                      color:
+                          colorTag(viewModel.pokemonDetailsStats.type1 ?? ''),
                     ),
                   ),
                   const SizedBox(height: 15),

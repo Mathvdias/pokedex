@@ -130,7 +130,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             ),
           ),
           body: Material(
-            color: Colors.white,
+            color:Colors.white,
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 64),
                 child: isMobile

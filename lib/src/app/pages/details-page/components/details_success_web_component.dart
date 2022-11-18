@@ -43,7 +43,7 @@ class DetailSuccessWeb extends StatelessWidget {
               flex: 1,
               child: Card(
                 color: colorTag(viewModel
-                    .pokemonDetailsStats.types![0].type!.name
+                    .pokemonDetailsStats.type1
                     .toString()),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

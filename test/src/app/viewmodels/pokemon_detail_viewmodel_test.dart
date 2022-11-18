@@ -28,4 +28,17 @@ void main() {
     expect(apiViewModel.pokemonDetails.evolution,
         "https://pokeapi.co/api/v2/evolution-chain/10/");
   });
+  test('Teste Category pokemon type1', () async {
+    await apiViewModel.fetchPokemonDetail('1');
+    expect(apiViewModel.pokemonDetailsStats.type1, "grass");
+  });
+  test('Teste Category pokemon type2', () async {
+    await apiViewModel.fetchPokemonDetail('1');
+    expect(apiViewModel.pokemonDetailsStats.type2, "poison");
+  });
+
+  test('Teste Category pokemon charmander type 2 null', () async {
+    await apiViewModel.fetchPokemonDetail('4');
+    expect(apiViewModel.pokemonDetailsStats.type2, '');
+  });
 }
