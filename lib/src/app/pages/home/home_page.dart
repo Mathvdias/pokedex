@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/src/app/pages/home/components/app_bar.dart';
 import 'package:provider/provider.dart';
-import '../../common/loading.dart';
 import '../../viewmodels/pokemon_viewmodel.dart';
 import 'components/card_pokemon_component.dart';
 
@@ -30,20 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<PokemonViewModel>();
     return Scaffold(
-      appBar: const AppBarComponent(),
-      body: AnimatedBuilder(
-        animation: viewModel.state,
-        builder: (context, child) {
-          return Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              CardPokemon(viewModel: viewModel),
-              Loading(viewModel: viewModel),
-            ],
-          );
-        },
-      ),
-    );
+        appBar: const AppBarComponent(),
+        body: CardPokemon(viewModel: viewModel));
   }
 
   @override

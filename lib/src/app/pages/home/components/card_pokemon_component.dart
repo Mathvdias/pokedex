@@ -15,7 +15,7 @@ class CardPokemon extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return AnimatedBuilder(
-      animation: viewModel,
+      animation: viewModel.state,
       builder: ((context, child) {
         return PokemonListPokemonsGrid(width: width, viewModel: viewModel);
       }),
@@ -36,19 +36,18 @@ class PokemonListPokemonsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Colors.transparent,
       child: Padding(
         padding:
             EdgeInsets.symmetric(horizontal: width >= 1080 ? width / 4 : 0),
         child: GridView.builder(
-            shrinkWrap: true,
-            physics: const RangeMaintainingScrollPhysics(),
             controller: viewModel.scrollController,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 5 / 9,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15),
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 5 / 9,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
             itemCount: viewModel.listAllPokemon.length,
             itemBuilder: (BuildContext ctx, index) {
               return CardPokemonDetailComponent(
