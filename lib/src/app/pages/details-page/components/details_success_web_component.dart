@@ -31,8 +31,7 @@ class DetailSuccessWeb extends StatelessWidget {
                     Hero(
                       tag: 'imageHero: ${viewModel.pokemonDetails.id}',
                       child: FadeInImage.assetNetwork(
-                        image: viewModel.pokemonDetailsStats.sprites!.other!
-                            .officialArtwork!.frontDefault
+                        image: viewModel.pokemonDetailsStats.sprite
                             .toString(),
                         placeholder: 'assets/images/pokeLoad.gif',
                       ),
@@ -43,7 +42,7 @@ class DetailSuccessWeb extends StatelessWidget {
               flex: 1,
               child: Card(
                 color: colorTag(viewModel
-                    .pokemonDetailsStats.types![0].type!.name
+                    .pokemonDetailsStats.type1
                     .toString()),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -31,8 +31,7 @@ class StatsBar extends StatelessWidget {
             label,
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.w600,
-              color: colorTag(
-                  viewModel.pokemonDetailsStats.types?[0].type?.name ?? ''),
+              color: colorTag(viewModel.pokemonDetailsStats.type1 ?? ''),
             ),
           ),
           const Spacer(),
@@ -40,8 +39,7 @@ class StatsBar extends StatelessWidget {
             convertValue(value),
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.w600,
-              color: colorTag(
-                  viewModel.pokemonDetailsStats.types?[0].type?.name ?? ''),
+              color: colorTag(viewModel.pokemonDetailsStats.type1 ?? ''),
             ),
           ),
           Container(
@@ -52,9 +50,9 @@ class StatsBar extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               child: LinearProgressIndicator(
                 backgroundColor: Colors.grey[300],
-                valueColor: AlwaysStoppedAnimation<Color>(colorTag(
-                    viewModel.pokemonDetailsStats.types?[0].type?.name ?? '')),
-                value: value / 100,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    colorTag(viewModel.pokemonDetailsStats.type1 ?? '')),
+                value: value / 300,
               ),
             ),
           ),
