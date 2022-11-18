@@ -23,9 +23,9 @@ void main() {
     expect(apiViewModel.pokemonDetails.flavorTextEntries![10].flavorText,
         "It has a preference for hot things.\nWhen it rains, steam is said to spout from\nthe tip of its tail.");
   });
-  test('Teste Category pokemon image', () async {
-    await apiViewModel.fetchPokemonDetail('4');
-    expect(apiViewModel.pokemonDetailsStats.sprites!.other!.officialArtwork,
-        isA<PokemonDetailStatsModel>());
+  test('Teste Category pokemon evolution url', () async {
+    await apiViewModel.fetchDetails('pichu');
+    expect(apiViewModel.pokemonDetails.evolution,
+        "https://pokeapi.co/api/v2/evolution-chain/10/");
   });
 }

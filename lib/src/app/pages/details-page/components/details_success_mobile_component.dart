@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:pokedex/src/app/common/set_icon.dart';
 import 'package:pokedex/src/app/pages/details-page/components/page_component.dart';
 import 'package:pokedex/src/app/pages/details-page/components/stats_bar_component.dart';
 import 'package:pokedex/src/app/pages/details-page/components/text_formatter_spec.dart';
+import 'package:pokedex/src/app/pages/details-page/components/type_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/color_tag.dart';
@@ -33,6 +35,21 @@ class DetailsSuccessMobile extends StatelessWidget {
               placeholder: 'assets/images/pokeLoad.gif',
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TypeCard(
+                viewModel.pokemonDetailsStats.type1 ?? '',
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              TypeCard(
+                viewModel.pokemonDetailsStats.type2 ?? '',
+              )
+            ],
+          ),
           Card(
             color: colorTag(
                 viewModel.pokemonDetailsStats.types![0].type!.name.toString()),
@@ -41,7 +58,7 @@ class DetailsSuccessMobile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const PageComponent(
-                  percentHeight: 0.19,
+                  percentHeight: 0.23,
                   percentWidth: .2,
                 ),
                 Card(
@@ -127,11 +144,11 @@ class DetailsSuccessMobile extends StatelessWidget {
                     value: stat[2].baseStat!.toDouble(),
                   ),
                   StatsBar(
-                    label: 'Special Attack',
+                    label: 'X Attack',
                     value: stat[3].baseStat!.toDouble(),
                   ),
                   StatsBar(
-                    label: 'Special Defense',
+                    label: 'X Defense',
                     value: stat[4].baseStat!.toDouble(),
                   ),
                   StatsBar(

@@ -112,7 +112,6 @@ class _DetailsPokemonState extends State<DetailsPokemon>
         final bool isMobile = constraints.maxWidth < 600;
         return Scaffold(
           appBar: AppBar(
-            centerTitle: true,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -130,20 +129,25 @@ class _DetailsPokemonState extends State<DetailsPokemon>
               ],
             ),
           ),
-          body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: isMobile ? 32 : 64),
-              child: isMobile
-                  ? const DetailsSuccessMobile()
-                  : const DetailSuccessWeb()),
+          body: Material(
+            color: Colors.white,
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 64),
+                child: isMobile
+                    ? const DetailsSuccessMobile()
+                    : const DetailSuccessWeb()),
+          ),
         );
       },
     );
   }
 
   _loading() {
-    return Center(
-      child: Lottie.asset('assets/images/poke_loading.json',
-          frameRate: FrameRate(120), height: 50, width: 50),
+    return Material(
+      child: Center(
+        child: Lottie.asset('assets/images/poke_loading.json',
+            frameRate: FrameRate(120), height: 50, width: 50),
+      ),
     );
   }
 

@@ -9,6 +9,7 @@ class PokemonDetailModel {
     this.id,
     this.name,
     this.order,
+    this.evolution,
   });
 
   PokemonDetailModel.fromJson(Map<String, dynamic> json) {
@@ -27,6 +28,7 @@ class PokemonDetailModel {
     isLegendary = json['is_legendary'];
     name = json['name'];
     order = json['order'];
+    evolution = json['evolution_chain']['url'];
   }
 
   int? baseHappiness;
@@ -40,6 +42,7 @@ class PokemonDetailModel {
   bool? isLegendary;
   String? name;
   int? order;
+  String? evolution;
 }
 
 class FlavorTextEntries {

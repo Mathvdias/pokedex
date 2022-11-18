@@ -54,7 +54,7 @@ class StatsBar extends StatelessWidget {
                 backgroundColor: Colors.grey[300],
                 valueColor: AlwaysStoppedAnimation<Color>(colorTag(
                     viewModel.pokemonDetailsStats.types?[0].type?.name ?? '')),
-                value: value / 100,
+                value: value / 300,
               ),
             ),
           ),
