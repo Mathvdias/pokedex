@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pokedex/src/app/common/color_tag.dart';
 import 'package:provider/provider.dart';
 
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
+import 'components/page_component.dart';
 import 'components/text_formatter_spec.dart';
 
 class DetailsPokemon extends StatefulWidget {
@@ -106,91 +108,80 @@ class _DetailsPokemonState extends State<DetailsPokemon>
                     children: [
                       Hero(
                         tag: 'imageHero: ${viewModel.pokemonDetails.id}',
-                        child: Image.network(viewModel.pokemonDetailsStats
-                            .sprites!.other!.officialArtwork!.frontDefault
-                            .toString()),
+                        child: FadeInImage.assetNetwork(
+                          image: viewModel.pokemonDetailsStats.sprites!.other!
+                              .officialArtwork!.frontDefault
+                              .toString(),
+                          placeholder: 'assets/images/pokeLoad.gif',
+                        ),
                       ),
                     ]),
               ),
               Expanded(
                   flex: 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        height: 100,
-                        child: PageView(
-                          onPageChanged: (value) {
-                            controller!.index = value;
-                          },
-                          children: [
-                            Text(
-                              toBeginningOfSentenceCase(viewModel.pokemonDetails
-                                      .flavorTextEntries![9].flavorText ??
-                                  '')!,
-                              style: GoogleFonts.poppins(),
-                            ),
-                            Text(
-                              toBeginningOfSentenceCase(viewModel.pokemonDetails
-                                      .flavorTextEntries![10].flavorText ??
-                                  '')!,
-                              style: GoogleFonts.poppins(),
-                            )
-                          ],
-                        ),
-                      ),
-                      Card(
-                        elevation: 10,
-                        color: const Color(0xFF6390F0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextFormatterSpecs(
-                                  text:
-                                      "${convertValue(viewModel.pokemonDetailsStats.height)} m",
-                                  description: 'Height',
-                                ),
-                                TextFormatterSpecs(
-                                  text:
-                                      "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
-                                  description: 'Weight',
-                                ),
-                                const TextFormatterSpecs(
-                                  text: ' ♂ ♀ ',
-                                  description: 'Gender',
-                                )
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextFormatterSpecs(
-                                  text: toBeginningOfSentenceCase(
-                                      viewModel.pokemonDetails.species)!,
-                                  description: 'Category',
-                                ),
-                                TextFormatterSpecs(
-                                  text: toBeginningOfSentenceCase(viewModel
-                                      .pokemonDetailsStats
-                                      .abilities?[0]
-                                      .ability!
-                                      .name)!,
-                                  description: 'Abilities',
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                  child: Card(
+                    color: colorTag(viewModel
+                        .pokemonDetailsStats.types![0].type!.name
+                        .toString()),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width / 4,
+                            height: 150,
+                            child: const PageComponent()),
+                        Card(
+                          elevation: 10,
+                          color: Colors.white60,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextFormatterSpecs(
+                                    text:
+                                        "${convertValue(viewModel.pokemonDetailsStats.height)} m",
+                                    description: 'Height',
+                                  ),
+                                  TextFormatterSpecs(
+                                    text:
+                                        "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
+                                    description: 'Weight',
+                                  ),
+                                  const TextFormatterSpecs(
+                                    text: ' ♂ ♀ ',
+                                    description: 'Gender',
+                                  )
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextFormatterSpecs(
+                                    text: toBeginningOfSentenceCase(
+                                        viewModel.pokemonDetails.species)!,
+                                    description: 'Category',
+                                  ),
+                                  TextFormatterSpecs(
+                                    text: toBeginningOfSentenceCase(viewModel
+                                        .pokemonDetailsStats
+                                        .abilities?[0]
+                                        .ability!
+                                        .name)!,
+                                    description: 'Abilities',
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ))
             ],
           ),
