@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:pokedex/src/app/pages/details-page/components/page_component.dart';
+import 'package:pokedex/src/app/pages/details-page/components/stats_bar_component.dart';
 import 'package:pokedex/src/app/pages/details-page/components/text_formatter_spec.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,7 @@ class DetailsSuccessMobile extends StatelessWidget {
       return convertedValue.toString();
     }
 
+    final stat = viewModel.pokemonDetailsStats.stats;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -93,6 +96,52 @@ class DetailsSuccessMobile extends StatelessWidget {
               ],
             ),
           ),
+          Card(
+            elevation: 10,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const SizedBox(height: 15),
+                  Text(
+                    'Stats',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: colorTag(
+                          viewModel.pokemonDetailsStats.types?[0].type?.name ??
+                              ''),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  StatsBar(
+                    label: 'HP',
+                    value: stat![0].baseStat!.toDouble(),
+                  ),
+                  StatsBar(
+                    label: 'Attack',
+                    value: stat[1].baseStat!.toDouble(),
+                  ),
+                  StatsBar(
+                    label: 'Defense',
+                    value: stat[2].baseStat!.toDouble(),
+                  ),
+                  StatsBar(
+                    label: 'Special Attack',
+                    value: stat[3].baseStat!.toDouble(),
+                  ),
+                  StatsBar(
+                    label: 'Special Defense',
+                    value: stat[4].baseStat!.toDouble(),
+                  ),
+                  StatsBar(
+                    label: 'Speed',
+                    value: stat[5].baseStat!.toDouble(),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

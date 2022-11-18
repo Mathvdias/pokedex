@@ -8,7 +8,6 @@ import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/details_success_mobile_component.dart';
 import 'components/details_success_web_component.dart';
 
-
 class DetailsPokemon extends StatefulWidget {
   const DetailsPokemon({
     Key? key,
@@ -43,7 +42,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
 
   @override
   void dispose() {
-    controller!.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
