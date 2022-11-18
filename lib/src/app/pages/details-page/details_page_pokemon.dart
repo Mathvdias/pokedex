@@ -46,15 +46,15 @@ class _DetailsPokemonState extends State<DetailsPokemon>
     super.dispose();
   }
 
-  stateManagement(ResultDetailStats state) {
+  stateManagement(ResultDetail state) {
     switch (state) {
-      case ResultDetailStats.start:
+      case ResultDetail.start:
         return _start();
-      case ResultDetailStats.loading:
+      case ResultDetail.loading:
         return _loading();
-      case ResultDetailStats.success:
+      case ResultDetail.success:
         return _success();
-      case ResultDetailStats.error:
+      case ResultDetail.error:
         return _error();
 
       default:
@@ -161,7 +161,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
     return AnimatedBuilder(
       animation: viewModel.state,
       builder: (context, child) {
-        return stateManagement(viewModel.state.value);
+        return stateManagement(viewModel.stateDetail.value);
       },
     );
   }

@@ -29,9 +29,7 @@ class DetailsSuccessMobile extends StatelessWidget {
           Hero(
             tag: 'imageHero: ${viewModel.pokemonDetails.id}',
             child: FadeInImage.assetNetwork(
-              image: viewModel.pokemonDetailsStats.sprites!.other!
-                  .officialArtwork!.frontDefault
-                  .toString(),
+              image: viewModel.pokemonDetailsStats.sprite.toString(),
               placeholder: 'assets/images/pokeLoad.gif',
             ),
           ),
@@ -39,15 +37,16 @@ class DetailsSuccessMobile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TypeCard(
+              if (viewModel.pokemonDetailsStats.type1 != null)TypeCard(
                 viewModel.pokemonDetailsStats.type1 ?? '',
               ),
               const SizedBox(
                 width: 10,
               ),
-              TypeCard(
-                viewModel.pokemonDetailsStats.type2 ?? '',
-              )
+              if (viewModel.pokemonDetailsStats.type2 != null)
+                TypeCard(
+                  viewModel.pokemonDetailsStats.type2 ?? '',
+                )
             ],
           ),
           Card(

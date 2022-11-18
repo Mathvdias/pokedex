@@ -6,8 +6,9 @@ class PokemonDetailStatsModel {
     this.moves,
     this.name,
     this.order,
-    this.sprites,
+    this.sprite,
     this.stats,
+    this.types,
     this.type1 = '',
     this.type2 = '',
     this.weight,
@@ -35,16 +36,16 @@ class PokemonDetailStatsModel {
     name = json['name'];
     order = json['order'];
 
-    sprites =
-        json['sprites'] != null ? Sprites.fromJson(json['sprites']) : null;
+    sprite = json['sprites']['other']['official-artwork']['front_default'];
     if (json['stats'] != null) {
       stats = <Stats>[];
       json['stats'].forEach((v) {
         stats!.add(Stats.fromJson(v));
       });
     }
+    types = json['types'];
     type1 = json['types'][0]['type']['name'] ?? "";
-    type2 = json['types'][1]['type']['name'] ?? "";
+    type2 = types?.length == 2 ? json['types'][1]['type']['name'] : null;
     weight = json['weight'] ?? "";
   }
 
@@ -57,8 +58,9 @@ class PokemonDetailStatsModel {
   List<Moves>? moves;
   String? name;
   int? order;
-  Sprites? sprites;
+  String? sprite;
   List<Stats>? stats;
+  List? types;
   String? type1;
   String? type2;
   int? weight;

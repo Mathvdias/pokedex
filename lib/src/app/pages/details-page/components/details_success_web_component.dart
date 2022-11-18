@@ -31,8 +31,7 @@ class DetailSuccessWeb extends StatelessWidget {
                     Hero(
                       tag: 'imageHero: ${viewModel.pokemonDetails.id}',
                       child: FadeInImage.assetNetwork(
-                        image: viewModel.pokemonDetailsStats.sprites!.other!
-                            .officialArtwork!.frontDefault
+                        image: viewModel.pokemonDetailsStats.sprite
                             .toString(),
                         placeholder: 'assets/images/pokeLoad.gif',
                       ),
