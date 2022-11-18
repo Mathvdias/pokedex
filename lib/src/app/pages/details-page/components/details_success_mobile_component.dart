@@ -37,9 +37,10 @@ class DetailsSuccessMobile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (viewModel.pokemonDetailsStats.type1 != null)TypeCard(
-                viewModel.pokemonDetailsStats.type1 ?? '',
-              ),
+              if (viewModel.pokemonDetailsStats.type1 != null)
+                TypeCard(
+                  viewModel.pokemonDetailsStats.type1 ?? '',
+                ),
               const SizedBox(
                 width: 10,
               ),
@@ -55,8 +56,12 @@ class DetailsSuccessMobile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const PageComponent(
-                  percentHeight: 0.23,
+                PageComponent(
+                  percentHeight: viewModel.pokemonDetails.flavorTextEntries![9]
+                              .flavorText!.length >
+                          90
+                      ? .26
+                      : 0.23,
                   percentWidth: .2,
                 ),
                 Card(
