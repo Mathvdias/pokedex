@@ -31,7 +31,7 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
           );
         }
       },
-      placeholder: "Pesquise um pokémon",
+      placeholder: "Pesquise um pokémon pelo nome ou id",
     );
   }
 }

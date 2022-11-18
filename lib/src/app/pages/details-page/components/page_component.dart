@@ -23,6 +23,8 @@ class PageComponent extends StatelessWidget {
             initialIndex: 0,
             length: 2,
             child: TabBar(
+              labelColor: Colors.white,
+              indicatorColor: Colors.white,
               onTap: (value) {
                 index.value = value;
               },
@@ -53,8 +55,10 @@ class PageComponent extends StatelessWidget {
                                   .flavorTextEntries![10].flavorText ??
                               '')!
                           : '',
-                  style:
-                      GoogleFonts.poppins(fontSize: width <= 1080 ? 13 : 20),
+                  style: GoogleFonts.poppins(
+                    fontSize: width <= 1080 ? 13 : 20,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               );
             },
