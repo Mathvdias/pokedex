@@ -4,18 +4,16 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/color_tag.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
 import 'components/details_success_mobile_component.dart';
 import 'components/details_success_web_component.dart';
-import 'components/page_component.dart';
-import 'components/text_formatter_spec.dart';
 
 class DetailsPokemon extends StatefulWidget {
-  static const routeName = '/details';
   const DetailsPokemon({
     Key? key,
   }) : super(key: key);
+
+  static const routeName = '/details';
 
   @override
   State<DetailsPokemon> createState() => _DetailsPokemonState();
@@ -23,6 +21,8 @@ class DetailsPokemon extends StatefulWidget {
 
 class _DetailsPokemonState extends State<DetailsPokemon>
     with TickerProviderStateMixin {
+  TabController? controller;
+
   var _isInit = true;
 
   @override
@@ -40,10 +40,9 @@ class _DetailsPokemonState extends State<DetailsPokemon>
     _isInit = false;
   }
 
-  TabController? controller;
   @override
   void dispose() {
-    controller!.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
