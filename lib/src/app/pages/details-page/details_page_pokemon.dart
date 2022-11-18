@@ -96,96 +96,96 @@ class _DetailsPokemonState extends State<DetailsPokemon>
           ],
         ),
       ),
-      body: Wrap(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Hero(
-                        tag: 'imageHero: ${viewModel.pokemonDetails.id}',
-                        child: FadeInImage.assetNetwork(
-                          image: viewModel.pokemonDetailsStats.sprites!.other!
-                              .officialArtwork!.frontDefault
-                              .toString(),
-                          placeholder: 'assets/images/pokeLoad.gif',
-                        ),
-                      ),
-                    ]),
-              ),
-              Expanded(
-                  flex: 1,
-                  child: Card(
-                    color: colorTag(viewModel
-                        .pokemonDetailsStats.types![0].type!.name
-                        .toString()),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 64),
+        child: Wrap(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 4,
-                            height: 150,
-                            child: const PageComponent()),
-                        Card(
-                          elevation: 10,
-                          color: Colors.white60,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextFormatterSpecs(
-                                    text:
-                                        "${convertValue(viewModel.pokemonDetailsStats.height)} m",
-                                    description: 'Height',
-                                  ),
-                                  TextFormatterSpecs(
-                                    text:
-                                        "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
-                                    description: 'Weight',
-                                  ),
-                                  const TextFormatterSpecs(
-                                    text: ' ♂ ♀ ',
-                                    description: 'Gender',
-                                  )
-                                ],
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextFormatterSpecs(
-                                    text: toBeginningOfSentenceCase(
-                                        viewModel.pokemonDetails.species)!,
-                                    description: 'Category',
-                                  ),
-                                  TextFormatterSpecs(
-                                    text: toBeginningOfSentenceCase(viewModel
-                                        .pokemonDetailsStats
-                                        .abilities?[0]
-                                        .ability!
-                                        .name)!,
-                                    description: 'Abilities',
-                                  ),
-                                ],
-                              )
-                            ],
+                        Hero(
+                          tag: 'imageHero: ${viewModel.pokemonDetails.id}',
+                          child: FadeInImage.assetNetwork(
+                            image: viewModel.pokemonDetailsStats.sprites!.other!
+                                .officialArtwork!.frontDefault
+                                .toString(),
+                            placeholder: 'assets/images/pokeLoad.gif',
                           ),
-                        )
-                      ],
-                    ),
-                  ))
-            ],
-          ),
-        ],
+                        ),
+                      ]),
+                ),
+                Expanded(
+                    flex: 1,
+                    child: Card(
+                      color: colorTag(viewModel
+                          .pokemonDetailsStats.types![0].type!.name
+                          .toString()),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const PageComponent(),
+                          Card(
+                            elevation: 10,
+                            color: Colors.white60,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextFormatterSpecs(
+                                      text:
+                                          "${convertValue(viewModel.pokemonDetailsStats.height)} m",
+                                      description: 'Height',
+                                    ),
+                                    TextFormatterSpecs(
+                                      text:
+                                          "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
+                                      description: 'Weight',
+                                    ),
+                                    const TextFormatterSpecs(
+                                      text: ' ♂ ♀ ',
+                                      description: 'Gender',
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextFormatterSpecs(
+                                      text: toBeginningOfSentenceCase(
+                                          viewModel.pokemonDetails.species)!,
+                                      description: 'Category',
+                                    ),
+                                    TextFormatterSpecs(
+                                      text: toBeginningOfSentenceCase(viewModel
+                                          .pokemonDetailsStats
+                                          .abilities?[0]
+                                          .ability!
+                                          .name)!,
+                                      description: 'Abilities',
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
