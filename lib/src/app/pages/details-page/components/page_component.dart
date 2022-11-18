@@ -6,7 +6,13 @@ import 'package:provider/provider.dart';
 import '../../../viewmodels/pokemon_detail_viewmodel.dart';
 
 class PageComponent extends StatelessWidget {
-  const PageComponent({super.key});
+  const PageComponent({
+    Key? key,
+    required this.percentWidth,
+    required this.percentHeight,
+  }) : super(key: key);
+  final double percentWidth;
+  final double percentHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +21,8 @@ class PageComponent extends StatelessWidget {
     final viewModel = context.watch<PokemonDetailViewModel>();
     final index = ValueNotifier<int>(0);
     return SizedBox(
-      width: width / 3.8,
-      height: height * .25,
+      width: width / percentWidth,
+      height: height * percentHeight,
       child: Column(
         children: [
           DefaultTabController(

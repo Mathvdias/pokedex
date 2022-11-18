@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pokedex/src/app/common/color_tag.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/color_tag.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
+import 'components/details_success_mobile_component.dart';
+import 'components/details_success_web_component.dart';
 import 'components/page_component.dart';
 import 'components/text_formatter_spec.dart';
 
@@ -61,132 +63,81 @@ class _DetailsPokemonState extends State<DetailsPokemon>
     }
   }
 
-  String convertValue(value) {
-    double convertedValue = value / 10;
-    return convertedValue.toString();
-  }
-
   _error() {
     final pokeId = ModalRoute.of(context)?.settings.arguments as String;
     final viewModel = context.watch<PokemonDetailViewModel>();
-    return ElevatedButton(
-        onPressed: () => viewModel.fetchPokemonDetail(pokeId),
-        child: const Text("Erro"));
+    return Material(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Image.asset('assets/images/pokeLoad.gif'),
+          const SizedBox(
+            height: 100,
+          ),
+          Text(
+            'Lamentamos, mas não foi possivel buscar o pokémon!',
+            style: GoogleFonts.poppins(),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          ElevatedButton(
+              onPressed: () => viewModel.fetchPokemonDetail(pokeId),
+              child: Text(
+                "Recarregar",
+                style: GoogleFonts.poppins(),
+              )),
+          const SizedBox(
+            height: 25,
+          ),
+          OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Voltar',
+                style: GoogleFonts.poppins(),
+              ))
+        ],
+      ),
+    );
   }
 
   _success() {
     final viewModel = context.watch<PokemonDetailViewModel>();
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              toBeginningOfSentenceCase(viewModel.pokemonDetails.name)!,
-              style: GoogleFonts.poppins(),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Text(
-              "N° ${viewModel.pokemonDetails.id}",
-              style: GoogleFonts.poppins(color: Colors.grey[600]),
-            )
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 64),
-        child: Wrap(
-          children: [
-            Row(
+
+    return LayoutBuilder(
+      builder: (ctx, constraints) {
+        final bool isMobile = constraints.maxWidth < 600;
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Hero(
-                          tag: 'imageHero: ${viewModel.pokemonDetails.id}',
-                          child: FadeInImage.assetNetwork(
-                            image: viewModel.pokemonDetailsStats.sprites!.other!
-                                .officialArtwork!.frontDefault
-                                .toString(),
-                            placeholder: 'assets/images/pokeLoad.gif',
-                          ),
-                        ),
-                      ]),
+                Text(
+                  toBeginningOfSentenceCase(viewModel.pokemonDetails.name)!,
+                  style: GoogleFonts.poppins(),
                 ),
-                Expanded(
-                    flex: 1,
-                    child: Card(
-                      color: colorTag(viewModel
-                          .pokemonDetailsStats.types![0].type!.name
-                          .toString()),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const PageComponent(),
-                          Card(
-                            elevation: 10,
-                            color: Colors.white60,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextFormatterSpecs(
-                                      text:
-                                          "${convertValue(viewModel.pokemonDetailsStats.height)} m",
-                                      description: 'Height',
-                                    ),
-                                    TextFormatterSpecs(
-                                      text:
-                                          "${convertValue(viewModel.pokemonDetailsStats.weight)} kg",
-                                      description: 'Weight',
-                                    ),
-                                    const TextFormatterSpecs(
-                                      text: ' ♂ ♀ ',
-                                      description: 'Gender',
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextFormatterSpecs(
-                                      text: toBeginningOfSentenceCase(
-                                          viewModel.pokemonDetails.species)!,
-                                      description: 'Category',
-                                    ),
-                                    TextFormatterSpecs(
-                                      text: toBeginningOfSentenceCase(viewModel
-                                          .pokemonDetailsStats
-                                          .abilities?[0]
-                                          .ability!
-                                          .name)!,
-                                      description: 'Abilities',
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ))
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "N° ${viewModel.pokemonDetails.id}",
+                  style: GoogleFonts.poppins(color: Colors.grey[600]),
+                )
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+          body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: isMobile ? 32 : 64),
+              child: isMobile
+                  ? const DetailsSuccessMobile()
+                  : const DetailSuccessWeb()),
+        );
+      },
     );
   }
 
