@@ -4,16 +4,16 @@ import 'package:provider/provider.dart';
 import '../../viewmodels/pokemon_viewmodel.dart';
 import 'components/card_pokemon_component.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     final viewModel = context.read<PokemonViewModel>();

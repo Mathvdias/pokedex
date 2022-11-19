@@ -22,7 +22,17 @@ class CardPokemon extends StatelessWidget {
     return AnimatedBuilder(
       animation: viewModel.state,
       builder: ((context, child) {
-        return PokemonListPokemonsGrid(width: width, viewModel: viewModel);
+        return Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            PokemonListPokemonsGrid(width: width, viewModel: viewModel),
+            viewModel.state.value == ResultState.loading
+                ? Positioned(
+                    bottom: 80,
+                    child: Image.asset('assets/images/pokeLoad.gif'))
+                : Container(),
+          ],
+        );
       }),
     );
   }

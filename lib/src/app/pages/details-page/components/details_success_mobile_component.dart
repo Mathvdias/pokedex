@@ -57,11 +57,14 @@ class DetailsSuccessMobile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 PageComponent(
-                  percentHeight: viewModel.pokemonDetails.flavorTextEntries![9]
-                              .flavorText!.length >
-                          90
+                  percentHeight: (viewModel.pokemonDetails.flavorTextEntries![9]
+                                  .flavorText!.length >
+                              200 ||
+                          viewModel.pokemonDetails.flavorTextEntries![9]
+                                  .flavorText!.length >
+                              200)
                       ? .26
-                      : 0.23,
+                      : 0.195,
                   percentWidth: .2,
                 ),
                 Card(

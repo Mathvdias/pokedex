@@ -130,7 +130,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             ),
           ),
           body: Material(
-            color:Colors.white,
+            color: Colors.white,
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 64),
                 child: isMobile
@@ -149,7 +149,7 @@ class _DetailsPokemonState extends State<DetailsPokemon>
             frameRate: FrameRate(120), height: 50, width: 50),
       ),
     );
-  }
+  }   
 
   _start() {
     return Container();

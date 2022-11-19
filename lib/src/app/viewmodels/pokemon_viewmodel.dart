@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/src/app/service/models/pokemon_list_model.dart';
 import 'package:pokedex/src/app/service/repository/impl/pokemon_list_repository.dart';
 
+import '../../app_config.dart';
 import '../service/models/pokemom_model.dart';
 import '../service/repository/impl/pokemon_repository.dart';
 
@@ -23,13 +24,10 @@ class PokemonViewModel extends ChangeNotifier {
   late final ScrollController scrollController;
   final state = ValueNotifier(ResultState.start);
   Future fetchList() async {
-    state.value = ResultState.loading;
     try {
       pokemomListCount = await repositoryList.getAllPokemons(
-          "https://pokeapi.co/api/v2/pokemon?limit=12&offset=$pageCount");
-      state.value = ResultState.success;
+          "${ApiURL.instance.base()}/pokemon?limit=12&offset=$pageCount");
     } catch (e) {
-      state.value = ResultState.error;
       inspect(e);
     }
 
@@ -37,14 +35,17 @@ class PokemonViewModel extends ChangeNotifier {
   }
 
   Future fetchAll() async {
+    state.value = ResultState.loading;
     loading.value = true;
     fetchList();
     for (int index = page1; index < (page2 + 1); index++) {
       try {
         listAllPokemon.add(await repositoryPokemon.getPokemons(index));
       } catch (e) {
+        state.value = ResultState.error;
         inspect(e);
       }
+      state.value = ResultState.success;
     }
     pageCount = pageCount + reasonMath;
     page1 = page1 + reasonMath;

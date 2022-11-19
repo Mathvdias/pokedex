@@ -1,6 +1,7 @@
 import 'package:pokedex/src/app/service/providers/http_client_interface.dart';
 import 'package:pokedex/src/app/service/repository/pokemon_repository_interface.dart';
 
+import '../../../../app_config.dart';
 import '../../models/pokemom_model.dart';
 
 class PokemonRepository implements IPokemonRepository {
@@ -10,7 +11,7 @@ class PokemonRepository implements IPokemonRepository {
   @override
   Future<PokemonModel> getPokemons(int id) async {
     var json = await client
-        .get("https://pokeapi.co/api/v2/pokemon/$id");
+        .get("${ApiURL.instance.base()}/pokemon/$id");
     return PokemonModel.fromJson(json); 
   }
 }
