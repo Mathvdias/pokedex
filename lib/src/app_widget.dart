@@ -5,15 +5,16 @@ import 'package:pokedex/src/app/viewmodels/pokemon_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'app/pages/details-page/details_page_pokemon.dart';
-import 'app/pages/home/home_page.dart';
 
+
+import 'app/pages/home/home_page.dart';
 import 'app/service/repository/impl/pokemon_details_repository.dart';
 import 'app/service/repository/impl/pokemon_list_repository.dart';
 import 'app/service/repository/impl/pokemon_request_details_repository.dart';
 import 'app/viewmodels/pokemon_detail_viewmodel.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PokedexApp extends StatelessWidget {
+  const PokedexApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
               return const Banner(
                   location: BannerLocation.topEnd,
                   message: 'Matheus',
-                  child: MyHomePage(title: 'PokeDex'));
+                  child: HomePage(title: 'PokeDex'));
             },
             DetailsPokemon.routeName: (context) => const DetailsPokemon(),
           },
