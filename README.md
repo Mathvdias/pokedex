@@ -1,8 +1,7 @@
 
 # PokeDex - Flutter
 Um app Flutter para ver seus melhores Pokémons
-
-
+<br>
 
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
@@ -10,6 +9,9 @@ Um app Flutter para ver seus melhores Pokémons
 [![Flutter version](https://img.shields.io/badge/Flutter-3.3.6-orange)](https://flutter.dev/)
 [![PokeApi](https://img.shields.io/badge/Api-PokeApi-red)](https://pokeapi.co/)
 
+## Versão WEB/PWA - Vercel
+
+[POKEDEX](https://pokedex-matheus-vinicius.vercel.app/)
 
 ## Design
 
@@ -26,8 +28,10 @@ Layout para iOS, android e Web, o app foi desenvolvido com princios do SOLID e C
 Instale o app Pokedex com git
 
 ```bash
-  npm install my-project
-  cd my-project
+  git clone https://github.com/Mathvdias/pokedex.git
+  cd pokedex
+  code .
+  flutter pub get
 ```
 ## Api - Pokedex
 
@@ -41,5 +45,3 @@ O app foi usado a Api [PokeApi](https://pokeapi.co/docs/v2)
 - Google Fonts
 - http
 - Dev: Mockito
-
-
