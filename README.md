@@ -14,9 +14,11 @@ Um app Flutter para ver seus melhores Pokémons
 [POKEDEX](https://pokedex-matheus-vinicius.vercel.app/)
 
 ## Design
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+<div>
+<img align="center" src="https://user-images.githubusercontent.com/74201503/203208100-daa0526e-a6ce-40aa-9ad3-c7d6cb47492a.png" width="185" height="400"/>
+<img align="center" src="https://user-images.githubusercontent.com/74201503/203208359-503ee094-9f82-437c-9094-c34c198b4a2b.png" width="185" height="400"/>
+<img align="center" src="https://user-images.githubusercontent.com/74201503/203208383-f0b312cf-7590-4e81-a8f5-e6b63a4ea449.png" width="185" height="400"/>
+</div>
 
 ## Desenvolvimento
 
