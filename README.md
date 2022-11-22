@@ -20,6 +20,12 @@ Um app Flutter para ver seus melhores Pokémons
 <img align="center" src="https://user-images.githubusercontent.com/74201503/203208383-f0b312cf-7590-4e81-a8f5-e6b63a4ea449.png" width="185" height="400"/>
 </div>
 
+
+https://user-images.githubusercontent.com/74201503/203211206-a46aa0a7-3abb-41e8-8e72-e46ce0c80679.mp4
+
+
+
+
 ## Desenvolvimento
 
 Layout para iOS, android e Web, o app foi desenvolvido com princios do SOLID e CleanArch + MVVM, e testes unitários com mockito e testes de widget.
