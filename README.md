@@ -1,16 +1,45 @@
-# pokedex
 
-A new Flutter project.
+# PokeDex - Flutter
+Um app Flutter para ver seus melhores Pokémons
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+![Flutter Material 3](https://img.shields.io/badge/Flutter-Material%203-blue)
+[![Flutter version](https://img.shields.io/badge/Flutter-3.3.6-orange)](https://flutter.dev/)
+[![PokeApi](https://img.shields.io/badge/Api-PokeApi-red)](https://pokeapi.co/)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Design
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Desenvolvimento
+
+Layout para iOS, android e Web, o app foi desenvolvido com princios do SOLID e CleanArch + MVVM, e testes unitários com mockito e testes de widget.
+
+
+## Instalação
+
+Instale my-project com npm
+
+```bash
+  npm install my-project
+  cd my-project
+```
+## Api - Pokedex
+
+O app foi usado a Api [PokeApi](https://pokeapi.co/docs/v2)
+## Pacotes Usados
+
+- Dio
+- Provider
+- Intl
+- Cached Network Image
+- Google Fonts
+- http
+- Dev: Mockito
+
+
