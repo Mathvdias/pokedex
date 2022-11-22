@@ -28,7 +28,7 @@ https://user-images.githubusercontent.com/74201503/203211206-a46aa0a7-3abb-41e8-
 
 ## Desenvolvimento
 
-Layout para iOS, android e Web, o app foi desenvolvido com princios do SOLID e CleanArch + MVVM, e testes unitários com mockito e testes de widget.
+Layout para iOS, android e Web, o app foi desenvolvido com princípios do SOLID e CleanArch + MVVM, e testes unitários com mockito e testes de widget.
 
 
 ## Instalação
