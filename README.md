@@ -23,7 +23,7 @@ Layout para iOS, android e Web, o app foi desenvolvido com princios do SOLID e C
 
 ## Instalação
 
-Instale my-project com npm
+Instale o app Pokedex com git
 
 ```bash
   npm install my-project
