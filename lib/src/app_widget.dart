@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/src/app/service/providers/impl/dio_client_provider.dart';
-import 'package:pokedex/src/app/service/repository/impl/pokemon_repository.dart';
-import 'package:pokedex/src/app/viewmodels/pokemon_viewmodel.dart';
+
 import 'package:provider/provider.dart';
 
 import 'app/pages/details-page/details_page_pokemon.dart';
-
-
 import 'app/pages/home/home_page.dart';
+import 'app/service/providers/impl/dio_client_provider.dart';
 import 'app/service/repository/impl/pokemon_details_repository.dart';
 import 'app/service/repository/impl/pokemon_list_repository.dart';
+import 'app/service/repository/impl/pokemon_repository.dart';
 import 'app/service/repository/impl/pokemon_request_details_repository.dart';
 import 'app/viewmodels/pokemon_detail_viewmodel.dart';
+import 'app/viewmodels/pokemon_viewmodel.dart';
 
 class PokedexApp extends StatelessWidget {
   const PokedexApp({super.key});

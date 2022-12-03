@@ -7,4 +7,3 @@ class ApiURL {
 
   static const url = "https://pokeapi.co/api/v2";
 }
-

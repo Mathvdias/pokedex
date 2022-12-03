@@ -42,7 +42,6 @@ dependencies:
   lottie: ^2.0.0
   cached_network_image: ^3.2.2
   google_fonts: ^3.0.1
-  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
