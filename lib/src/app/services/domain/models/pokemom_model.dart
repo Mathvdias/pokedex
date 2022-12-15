@@ -1,30 +1,30 @@
 class PokemonModel {
-  var id;
-  var name;
-  var sprite;
-  var type1;
-  var type2;
-  var imagelow;
-  var height;
-  var weight;
+  int id;
+  String name;
+  String sprite;
+  String type1;
+  String? type2;
+  String imagelow;
+  int height;
+  int weight;
 
   PokemonModel({
-    this.id,
-    this.name,
-    this.sprite,
-    this.type1,
-    this.type2,
-    this.imagelow,
-    this.height,
-    this.weight,
+    required this.id,
+    required this.name,
+    required this.sprite,
+    required this.type1,
+    required this.type2,
+    required this.imagelow,
+    required this.height,
+    required this.weight,
   });
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
-    String pokeId = json['id'].toString();
+    
     final List types = json['types'];
     if (types.length == 1) {
       return PokemonModel(
-        id: pokeId,
+        id: json['id'],
         name: json['name'],
         sprite: json['sprites']['other']['official-artwork']['front_default'],
         type1: json['types'][0]['type']['name'],
@@ -35,7 +35,7 @@ class PokemonModel {
       );
     } else {
       return PokemonModel(
-        id: pokeId,
+        id: json['id'],
         name: json['name'],
         sprite: json['sprites']['other']['official-artwork']['front_default'],
         type1: json['types'][0]['type']['name'],

@@ -1,47 +1,33 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 
-import '../service/models/pokemon_details.dart';
-import '../service/models/pokemon_details_stats_model.dart';
-import '../service/repository/impl/pokemon_details_repository.dart';
-import '../service/repository/impl/pokemon_request_details_repository.dart';
+import '../states/pokemon_state.dart';
+import '../states/pokemons_states.dart';
+import '../services/data/repository/impl/pokemon_details_repository.dart';
+import '../services/data/repository/impl/pokemon_request_details_repository.dart';
 
-class PokemonDetailViewModel extends ChangeNotifier {
-  PokemonDetailViewModel(this.repositoryStats, this.repositoryDetails);
-
-  var pokemonDetails = PokemonDetailModel();
-  var pokemonDetailsStats = PokemonDetailStatsModel();
+class PokemonDetailViewModel extends ValueNotifier<PokemonState> {
   final PokemonDetailsRepository repositoryDetails;
   final PokemonDetailsStatsRepository repositoryStats;
-  final state = ValueNotifier(ResultDetailStats.start);
-  final stateDetail = ValueNotifier(ResultDetail.start);
+  PokemonDetailViewModel(
+    this.repositoryStats,
+    this.repositoryDetails,
+  ) : super(StartPokemonState());
 
-  Future<void> fetchPokemonDetail(String id) async {
-    state.value = ResultDetailStats.loading;
-    try {
-      pokemonDetailsStats = await repositoryStats.getPokemonDetail(id);
-      state.value = ResultDetailStats.success;
-    } catch (e) {
-      state.value = ResultDetailStats.error;
-      inspect(e);
-    }
-    notifyListeners();
-  }
+  void emit(PokemonState state) => value = state;
 
-  Future<void> fetchDetails(String id) async {
-    stateDetail.value = ResultDetail.loading;
-    try {
-      pokemonDetails = await repositoryDetails.getPokemonDetail(id);
-      stateDetail.value = ResultDetail.success;
-    } catch (e) {
-      stateDetail.value = ResultDetail.error;
-      inspect(e);
-    }
+  Future<void> fetch(String id) async {
+    emit(LoadingPokemonState());
+    final pokemonDetailsStats = await repositoryStats.getPokemonDetail(id);
+    pokemonDetailsStats.when((pokemonDetailsStatsModel) async {
+      final pokemonDetails = await repositoryDetails.getPokemonDetail(id);
+      pokemonDetails.when((pokemonDetailModel) {
+        emit(LoadedPokemonState(pokemonDetailsStatsModel, pokemonDetailModel));
+      }, (e) {
+        emit(ErrorPokemonState(e.message));
+      });
+    }, (e) {
+      emit(ErrorPokemonState(e.message));
+    });
     notifyListeners();
   }
 }
-
-enum ResultDetailStats { start, loading, success, error }
-
-enum ResultDetail { start, loading, success, error }

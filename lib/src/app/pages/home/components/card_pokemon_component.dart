@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../common/tag.dart';
-import '../../../viewmodels/pokemon_viewmodel.dart';
+
+import '../../../viewmodels/pokemons_viewmodel.dart';
 import '../../details-page/details_page_pokemon.dart';
 
 class CardPokemon extends StatelessWidget {
