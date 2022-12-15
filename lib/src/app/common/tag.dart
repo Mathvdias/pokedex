@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'color_tag.dart';
+import 'colors/color_tag.dart';
 
 class TagWidget extends StatelessWidget {
   final String textType;

@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'app/pages/details-page/details_page_pokemon.dart';
+import 'app/pages/pokemon_details/details_pokemon_page.dart';
+import 'app/pages/pokemons/pokemons_page.dart';
 
-import 'app/pages/home/home_page.dart';
-import 'app/services/data/providers/impl/dio_client_provider.dart';
-import 'app/services/data/repository/impl/pokemon_details_repository.dart';
-import 'app/services/data/repository/impl/pokemon_list_repository.dart';
-import 'app/services/data/repository/impl/pokemon_repository.dart';
-import 'app/services/data/repository/impl/pokemon_request_details_repository.dart';
-import 'app/viewmodels/pokemon_detail_viewmodel.dart';
-import 'app/viewmodels/pokemons_viewmodel.dart';
 import 'app_providers.dart';
 
 class PokedexApp extends StatelessWidget {
@@ -19,7 +12,7 @@ class PokedexApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: providers,
+        providers:providers,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'PokeDex',
@@ -35,7 +28,7 @@ class PokedexApp extends StatelessWidget {
               return const Banner(
                   location: BannerLocation.topEnd,
                   message: 'Matheus',
-                  child: HomePage(title: 'PokeDex'));
+                  child: HomePage());
             },
             DetailsPokemon.routeName: (context) => const DetailsPokemon(),
           },

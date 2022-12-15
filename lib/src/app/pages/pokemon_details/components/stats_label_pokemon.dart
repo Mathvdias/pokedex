@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-import '../../../common/color_tag.dart';
-import '../../../viewmodels/pokemon_detail_viewmodel.dart';
+import '../../../common/colors/map_card_color.dart';
+import '../../../states/pokemons_states.dart';
 
-class StatsBar extends StatelessWidget {
-  const StatsBar({
+class StatsLabel extends StatelessWidget {
+  const StatsLabel({
     Key? key,
     required this.label,
     required this.value,
+    required this.model,
   }) : super(key: key);
   final String label;
-  final double value;
+  final int value;
+  final LoadedPokemonState model;
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<PokemonDetailViewModel>();
     convertValue(value) {
-      double initValue = value;
+      int initValue = value;
       return initValue.toStringAsFixed(0);
     }
 
@@ -29,17 +28,16 @@ class StatsBar extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w600,
-              color: colorTag(viewModel.pokemonDetailsStats.type1 ?? ''),
-            ),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
+                ),
           ),
           const Spacer(),
           Text(
             convertValue(value),
-            style: GoogleFonts.poppins(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
-              color: colorTag(viewModel.pokemonDetailsStats.type1 ?? ''),
+              color: setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
             ),
           ),
           Container(
@@ -51,7 +49,7 @@ class StatsBar extends StatelessWidget {
               child: LinearProgressIndicator(
                 backgroundColor: Colors.grey[300],
                 valueColor: AlwaysStoppedAnimation<Color>(
-                    colorTag(viewModel.pokemonDetailsStats.type1 ?? '')),
+                    setTypeColor(model.pokemonDetailsStats.type1 ?? '')),
                 value: value / 300,
               ),
             ),

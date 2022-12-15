@@ -1,33 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../../../common/colors/map_card_color.dart';
+import '../../../states/pokemons_states.dart';
 
 class TextFormatterSpecs extends StatelessWidget {
   const TextFormatterSpecs({
     Key? key,
     required this.description,
     required this.text,
+    required this.model,
   }) : super(key: key);
   final String description;
   final String text;
+  final LoadedPokemonState model;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: Column(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            description,
-            style: GoogleFonts.poppins(color: Colors.white),
+          SizedBox(
+            width: 80,
+            child: Text(description,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color:
+                          setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
+                    )),
           ),
           const SizedBox(
-            height: 10,
+            width: 20,
           ),
           Text(
             text,
-            style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
             height: 10,
