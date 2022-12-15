@@ -56,7 +56,7 @@ class HomeIsMobile extends StatelessWidget {
                   itemCount: viewModel.listAllPokemon.length,
                   itemBuilder: ((context, index) {
                     final poke = viewModel.listAllPokemon[index];
-                    return CardPokemon(
+                    return CardPokemonComponent(
                       poke: poke,
                       index: index,
                     );

@@ -1,15 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:pokedex/src/pages/home/mobile/components/search_bar_component.dart';
+
 import 'package:pokedex/src/pages/home/web/home_web.dart';
 import 'package:provider/provider.dart';
-
-import '../../common/chip_component.dart';
-import '../../common/colors/map_card_color.dart';
 import '../../viewmodels/pokemons_viewmodel.dart';
-
-import '../details/details_pokemon_page.dart';
 import 'mobile/home_mobile.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,8 +12,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin<HomePage> {
+class _HomePageState extends State<HomePage> {
   ScrollController scrollController = ScrollController();
   @override
   void initState() {
@@ -40,17 +32,13 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  bool get wantKeepAlive => true;
-
-  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    super.build(context);
     final viewModel = context.watch<PokemonsViewModel>();
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth <= 600) {
+        if (constraints.maxWidth < 600) {
           return HomeIsMobile(
               scaffoldKey: scaffoldKey,
               viewModel: viewModel,

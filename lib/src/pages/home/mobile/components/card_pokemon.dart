@@ -7,8 +7,8 @@ import '../../../../common/colors/map_card_color.dart';
 import '../../../../services/domain/models/pokemom_model.dart';
 import '../../../details/details_pokemon_page.dart';
 
-class CardPokemon extends StatelessWidget {
-  const CardPokemon({
+class CardPokemonComponent extends StatelessWidget {
+  const CardPokemonComponent({
     Key? key,
     required this.poke,
     required this.index,
