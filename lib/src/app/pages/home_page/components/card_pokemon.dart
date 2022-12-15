@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../common/chip_component.dart';
 import '../../../common/colors/map_card_color.dart';
 import '../../../services/domain/models/pokemom_model.dart';
 import '../../pokemon_details/details_pokemon_page.dart';
@@ -69,29 +70,12 @@ class CardPokemon extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Chip(
-                            backgroundColor: setTypeColor(poke.type1),
-                            label: Text(
-                              toBeginningOfSentenceCase(poke.type1)!,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: Colors.white, fontSize: 12),
-                            )),
+                        ChipComponent(poke: poke.type1),
                         const SizedBox(
                           width: 5,
                         ),
                         if (poke.type2 != null)
-                          Chip(
-                              backgroundColor: setTypeColor(poke.type2!),
-                              label: Text(
-                                toBeginningOfSentenceCase(poke.type2)!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                        color: Colors.white, fontSize: 12),
-                              )),
+                          ChipComponent(poke: poke.type2!),
                       ],
                     ),
                   ],
