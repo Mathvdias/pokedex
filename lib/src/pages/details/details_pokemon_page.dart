@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/src/states/pokemon_state.dart';
 
 import 'package:provider/provider.dart';
 
@@ -61,7 +60,7 @@ class _DetailsPokemonState extends State<DetailsPokemon> {
             }
             if (viewModel.value is LoadedPokemonState) {
               return DetailsPagePokemonLoaded(
-                  loadedPokemonState: viewModel.value as LoadedPokemonState);
+                  poke: viewModel.value as LoadedPokemonState);
             }
             if (viewModel.value is ErrorPokemonState) {
               return DetailsPagePokemonError(

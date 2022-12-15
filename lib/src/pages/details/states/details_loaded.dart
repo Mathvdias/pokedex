@@ -11,10 +11,10 @@ import '../components/stats_pokemon.dart';
 class DetailsPagePokemonLoaded extends StatefulWidget {
   const DetailsPagePokemonLoaded({
     Key? key,
-    required this.loadedPokemonState,
+    required this.poke,
   }) : super(key: key);
 
-  final LoadedPokemonState loadedPokemonState;
+  final LoadedPokemonState poke;
 
   @override
   State<DetailsPagePokemonLoaded> createState() =>
@@ -33,8 +33,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              toBeginningOfSentenceCase(
-                  widget.loadedPokemonState.pokemonDetailsStats.name)!,
+              toBeginningOfSentenceCase(widget.poke.pokemonDetailsStats.name)!,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 20,
                 shadows: <Shadow>[
@@ -50,7 +49,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
               width: 10,
             ),
             Text(
-              "#${widget.loadedPokemonState.pokemonDetailsStats.id.toString()}",
+              "#${widget.poke.pokemonDetailsStats.id.toString()}",
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
@@ -65,9 +64,9 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
         children: [
           Image(
             image: CachedNetworkImageProvider(
-              widget.loadedPokemonState.pokemonDetailsStats.sprite.toString(),
-              maxHeight: 250,
-              maxWidth: 250,
+              widget.poke.pokemonDetailsStats.sprite.toString(),
+              maxHeight: 350,
+              maxWidth: 350,
             ),
             loadingBuilder: ((context, child, progress) {
               if (progress == null) {
@@ -82,15 +81,13 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (widget.loadedPokemonState.pokemonDetailsStats.type1 != null)
-                ChipComponent(
-                    poke: widget.loadedPokemonState.pokemonDetailsStats.type1!),
+              if (widget.poke.pokemonDetailsStats.type1 != null)
+                ChipComponent(poke: widget.poke.pokemonDetailsStats.type1!),
               const SizedBox(
                 width: 5,
               ),
-              if (widget.loadedPokemonState.pokemonDetailsStats.type2 != null)
-                ChipComponent(
-                    poke: widget.loadedPokemonState.pokemonDetailsStats.type2!)
+              if (widget.poke.pokemonDetailsStats.type2 != null)
+                ChipComponent(poke: widget.poke.pokemonDetailsStats.type2!)
             ],
           ),
           const SizedBox(
@@ -100,7 +97,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: FittedBox(
               child: Text(
-                widget.loadedPokemonState.pokemonDetails.description.toString(),
+                widget.poke.pokemonDetails.description.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1
@@ -126,14 +123,13 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
                 splashBorderRadius: BorderRadius.circular(
                   25.0,
                 ),
-                unselectedLabelColor: setTypeColor(
-                    widget.loadedPokemonState.pokemonDetailsStats.type1!),
+                unselectedLabelColor:
+                    setTypeColor(widget.poke.pokemonDetailsStats.type1!),
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                     25.0,
                   ),
-                  color: setTypeColor(
-                      widget.loadedPokemonState.pokemonDetailsStats.type1!),
+                  color: setTypeColor(widget.poke.pokemonDetailsStats.type1!),
                 ),
                 labelColor: Colors.white,
                 controller: tabController,
@@ -158,13 +154,13 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
           Expanded(
             child: TabBarView(controller: tabController, children: [
               AboutPokemon(
-                poke: widget.loadedPokemonState,
+                poke: widget.poke,
               ),
               StatsPokemon(
-                poke: widget.loadedPokemonState,
+                poke: widget.poke,
               ),
               MovesPokemon(
-                poke: widget.loadedPokemonState,
+                poke: widget.poke,
               )
             ]),
           ),
