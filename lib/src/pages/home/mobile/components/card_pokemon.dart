@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../common/chip_component.dart';
-import '../../../common/colors/map_card_color.dart';
-import '../../../services/domain/models/pokemom_model.dart';
-import '../../details/details_pokemon_page.dart';
+import '../../../../common/chip_component.dart';
+import '../../../../common/colors/map_card_color.dart';
+import '../../../../services/domain/models/pokemom_model.dart';
+import '../../../details/details_pokemon_page.dart';
 
 class CardPokemon extends StatelessWidget {
   const CardPokemon({
