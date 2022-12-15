@@ -35,10 +35,16 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             Text(
               toBeginningOfSentenceCase(
                   widget.loadedPokemonState.pokemonDetailsStats.name)!,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 20),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontSize: 20,
+                shadows: <Shadow>[
+                  const Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 7,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               width: 10,
@@ -91,14 +97,14 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: FittedBox(
               child: Text(
                 widget.loadedPokemonState.pokemonDetails.description.toString(),
                 style: Theme.of(context)
                     .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontSize: 12),
+                    .subtitle1
+                    ?.copyWith(fontSize: 15),
               ),
             ),
           ),

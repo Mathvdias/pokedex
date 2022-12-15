@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../common/colors/map_card_color.dart';
 
@@ -15,7 +16,7 @@ class MovesPokemon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: GridView.builder(
         itemCount: poke.pokemonDetailsStats.moves!.length,
         itemBuilder: ((context, index) => Container(
@@ -25,11 +26,18 @@ class MovesPokemon extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                poke.pokemonDetailsStats.moves![index],
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(color: Colors.white),
+                toBeginningOfSentenceCase(
+                    poke.pokemonDetailsStats.moves![index])!,
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                  color: Colors.white,
+                  shadows: <Shadow>[
+                    const Shadow(
+                      offset: Offset(2, 2),
+                      blurRadius: 7,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
               ),
             ))),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

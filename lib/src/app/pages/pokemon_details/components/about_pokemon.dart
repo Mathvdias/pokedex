@@ -18,7 +18,7 @@ class AboutPokemon extends StatelessWidget {
       child: Column(
         children: [
           TextFormatterSpecs(
-            description: 'Species',
+            description: 'Category',
             text: poke.pokemonDetails.species.toString(),
             model: poke,
           ),

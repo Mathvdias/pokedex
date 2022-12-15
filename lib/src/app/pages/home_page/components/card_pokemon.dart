@@ -47,7 +47,7 @@ class CardPokemon extends StatelessWidget {
                       return child;
                     }
                     return Center(
-                      child: Image.asset('images/poke.gif'),
+                      child: Image.asset('assets/images/pokeLoad.gif'),
                     );
                   }),
                 ),
@@ -59,17 +59,24 @@ class CardPokemon extends StatelessWidget {
                   children: [
                     Text(
                       '#${poke.id.toString()}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline1
-                          ?.copyWith(fontSize: 32),
+                      style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                            fontSize: 32,
+                            color: Colors.black54,
+                          ),
                     ),
                     Text(
                       '${toBeginningOfSentenceCase(poke.name)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: Colors.white, fontSize: 18),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontSize: 18,
+                        shadows: <Shadow>[
+                          const Shadow(
+                            offset: Offset(2, 2),
+                            blurRadius: 7,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [

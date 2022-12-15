@@ -23,6 +23,13 @@ class ChipComponent extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'PokeGoTypes',
                 color: Colors.white,
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 7,
+                    color: Colors.grey,
+                  ),
+                ],
               ),
             ),
             const SizedBox(
@@ -30,10 +37,17 @@ class ChipComponent extends StatelessWidget {
             ),
             Text(
               toBeginningOfSentenceCase(poke)!,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(color: Colors.white, fontSize: 12),
+              style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                color: Colors.white,
+                fontSize: 12,
+                shadows: const <Shadow>[
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 7,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
             ),
           ],
         ));

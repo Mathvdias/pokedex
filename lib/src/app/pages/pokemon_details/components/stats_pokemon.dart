@@ -14,7 +14,7 @@ class StatsPokemon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         child: Column(
           children: [
             StatsLabel(

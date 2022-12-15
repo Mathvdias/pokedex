@@ -29,7 +29,7 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
           Navigator.pushNamed(
             context,
             DetailsPokemon.routeName,
-            arguments: value,
+            arguments: (value).toLowerCase(),
           );
         }
       },

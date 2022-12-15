@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         elevation: 0.00,
         toolbarHeight: 60.2,
-        toolbarOpacity: 0.8,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(12),
@@ -60,39 +59,42 @@ class _HomePageState extends State<HomePage>
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(45),
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 8),
             child: SearchBarComponent(),
           ),
         ),
       ),
-      body: AnimatedBuilder(
-        animation: viewModel.state,
-        builder: ((context, child) {
-          return Stack(
-            alignment: Alignment.bottomCenter,
-            children: <Widget>[
-              ListView.builder(
-                  shrinkWrap: true,
-                  controller: scrollController,
-                  itemCount: viewModel.listAllPokemon.length,
-                  itemBuilder: ((context, index) {
-                    final poke = viewModel.listAllPokemon[index];
-                    return CardPokemon(
-                      poke: poke,
-                      index: index,
-                    );
-                  })),
-              if (viewModel.state.value == ResultState.loading)
-                Positioned(
-                  bottom: 80,
-                  child: Image.asset(
-                    'assets/images/pokeLoad.gif',
-                    scale: 2 / 3,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: AnimatedBuilder(
+          animation: viewModel.state,
+          builder: ((context, child) {
+            return Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                ListView.builder(
+                    shrinkWrap: true,
+                    controller: scrollController,
+                    itemCount: viewModel.listAllPokemon.length,
+                    itemBuilder: ((context, index) {
+                      final poke = viewModel.listAllPokemon[index];
+                      return CardPokemon(
+                        poke: poke,
+                        index: index,
+                      );
+                    })),
+                if (viewModel.state.value == ResultState.loading)
+                  Positioned(
+                    bottom: 80,
+                    child: Image.asset(
+                      'assets/images/pokeLoad.gif',
+                      scale: 2 / 3,
+                    ),
                   ),
-                ),
-            ],
-          );
-        }),
+              ],
+            );
+          }),
+        ),
       ),
     );
   }
