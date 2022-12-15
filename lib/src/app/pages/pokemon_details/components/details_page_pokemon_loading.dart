@@ -7,7 +7,7 @@ class DetailsPagePokemonLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Center(
-        child: Image.asset('images/poke.gif'),
+        child: Image.asset('assets/images/pokeLoad.gif'),
       ),
     );
   }

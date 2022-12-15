@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app/pages/pokemon_details/details_pokemon_page.dart';
-import 'app/pages/pokemons/pokemons_page.dart';
+import 'app/pages/home_page/pokemons_page.dart';
 
 import 'app_providers.dart';
 
@@ -12,15 +12,15 @@ class PokedexApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers:providers,
+        providers: providers,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'PokeDex',
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey),
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
             useMaterial3: true,
-            primarySwatch: Colors.blueGrey,
+            primarySwatch: Colors.orange,
           ),
           initialRoute: '/',
           routes: {
