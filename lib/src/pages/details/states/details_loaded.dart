@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pokedex/src/app/common/chip_component.dart';
+import 'package:pokedex/src/common/chip_component.dart';
 import '../../../common/colors/map_card_color.dart';
 import '../../../states/pokemons_states.dart';
-import 'about_pokemon.dart';
-import 'moves_pokemon.dart';
-import 'stats_pokemon.dart';
+import '../components/about_pokemon.dart';
+import '../components/moves_pokemon.dart';
+import '../components/stats_pokemon.dart';
 
 class DetailsPagePokemonLoaded extends StatefulWidget {
   const DetailsPagePokemonLoaded({
@@ -97,14 +97,14 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: FittedBox(
               child: Text(
                 widget.loadedPokemonState.pokemonDetails.description.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1
-                    ?.copyWith(fontSize: 15),
+                    ?.copyWith(fontSize: 20),
               ),
             ),
           ),

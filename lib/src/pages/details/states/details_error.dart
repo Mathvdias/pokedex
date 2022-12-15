@@ -23,7 +23,7 @@ class DetailsPagePokemonError extends StatelessWidget {
               flex: 2,
             ),
             Icon(
-              Icons.toggle_off_rounded,
+              Icons.search_off_rounded,
               size: 100,
               color: Theme.of(context).errorColor,
             ),

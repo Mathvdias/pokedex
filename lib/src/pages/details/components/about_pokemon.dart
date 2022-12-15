@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pokedex/src/app/common/extensions_strings.dart';
+import 'package:pokedex/src/common/extensions_strings.dart';
 
 import '../../../states/pokemons_states.dart';
 import 'text_formatter.dart';

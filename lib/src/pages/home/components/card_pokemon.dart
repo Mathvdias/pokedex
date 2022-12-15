@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../common/chip_component.dart';
 import '../../../common/colors/map_card_color.dart';
 import '../../../services/domain/models/pokemom_model.dart';
-import '../../pokemon_details/details_pokemon_page.dart';
+import '../../details/details_pokemon_page.dart';
 
 class CardPokemon extends StatelessWidget {
   const CardPokemon({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pokedex/src/app/common/set_icon.dart';
+import 'package:pokedex/src/common/set_icon.dart';
 
 import 'colors/map_card_color.dart';
 
@@ -39,7 +39,7 @@ class ChipComponent extends StatelessWidget {
               toBeginningOfSentenceCase(poke)!,
               style: Theme.of(context).textTheme.subtitle1?.copyWith(
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: 10,
                 shadows: const <Shadow>[
                   Shadow(
                     offset: Offset(2, 2),

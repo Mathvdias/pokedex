@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/src/app/common/text_theme.dart';
+import 'package:pokedex/src/app/text_theme.dart';
 import 'package:provider/provider.dart';
 
-import 'app/pages/pokemon_details/details_pokemon_page.dart';
-import 'app/pages/home_page/pokemons_page.dart';
-
+import '../pages/details/details_pokemon_page.dart';
+import '../pages/home/pokemons_page.dart';
 import 'app_providers.dart';
 
 class PokedexApp extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../pokemon_details/details_pokemon_page.dart';
+import '../../details/details_pokemon_page.dart';
 
 class SearchBarComponent extends StatefulWidget {
   const SearchBarComponent({super.key});

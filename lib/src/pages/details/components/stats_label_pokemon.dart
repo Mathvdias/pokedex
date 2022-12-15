@@ -39,7 +39,7 @@ class StatsLabel extends StatelessWidget {
                 color: setTypeColor(model.pokemonDetailsStats.type1 ?? '')),
           ),
           Container(
-            width: 250,
+            width: 200,
             height: 10,
             margin: const EdgeInsets.only(left: 15),
             child: ClipRRect(

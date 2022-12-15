@@ -28,7 +28,10 @@ class SplashPage extends StatelessWidget {
               ],
             ),
           ),
-          child: const CircularProgressIndicator()),
+          child: Image.asset(
+            'assets/images/pokeball.png',
+            scale: 30 / 9,
+          )),
     );
   }
 }

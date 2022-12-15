@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/src/states/pokemon_state.dart';
 
 import 'package:provider/provider.dart';
 
 import '../../states/pokemons_states.dart';
 import '../../viewmodels/pokemon_detail_viewmodel.dart';
-import 'components/details_page_pokemon_error.dart';
-import 'components/details_page_pokemon_loaded.dart';
-import 'components/details_page_pokemon_loading.dart';
-import 'components/details_page_pokemon_start.dart';
+import 'states/details_error.dart';
+import 'states/details_loaded.dart';
+import 'states/details_loading.dart';
+import 'states/details_start.dart';
 
 class DetailsPokemon extends StatefulWidget {
   const DetailsPokemon({

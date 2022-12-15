@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/src/app/pages/home_page/components/search_bar_component.dart';
+import 'package:pokedex/src/pages/home/components/search_bar_component.dart';
 import 'package:provider/provider.dart';
 
 import '../../viewmodels/pokemons_viewmodel.dart';
@@ -44,7 +44,9 @@ class _HomePageState extends State<HomePage>
       extendBodyBehindAppBar: true,
       key: scaffoldKey,
       appBar: AppBar(
-        elevation: 0.00,
+        scrolledUnderElevation: 3,
+        shadowColor: Colors.orange,
+        elevation: 0,
         toolbarHeight: 60.2,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -59,42 +61,39 @@ class _HomePageState extends State<HomePage>
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(45),
           child: Padding(
-            padding: EdgeInsets.fromLTRB(12, 0, 12, 8),
+            padding: EdgeInsets.fromLTRB(5, 0, 5, 8),
             child: SearchBarComponent(),
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: AnimatedBuilder(
-          animation: viewModel.state,
-          builder: ((context, child) {
-            return Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                ListView.builder(
-                    shrinkWrap: true,
-                    controller: scrollController,
-                    itemCount: viewModel.listAllPokemon.length,
-                    itemBuilder: ((context, index) {
-                      final poke = viewModel.listAllPokemon[index];
-                      return CardPokemon(
-                        poke: poke,
-                        index: index,
-                      );
-                    })),
-                if (viewModel.state.value == ResultState.loading)
-                  Positioned(
-                    bottom: 80,
-                    child: Image.asset(
-                      'assets/images/pokeLoad.gif',
-                      scale: 2 / 3,
-                    ),
+      body: AnimatedBuilder(
+        animation: viewModel.state,
+        builder: ((context, child) {
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              ListView.builder(
+                  shrinkWrap: true,
+                  controller: scrollController,
+                  itemCount: viewModel.listAllPokemon.length,
+                  itemBuilder: ((context, index) {
+                    final poke = viewModel.listAllPokemon[index];
+                    return CardPokemon(
+                      poke: poke,
+                      index: index,
+                    );
+                  })),
+              if (viewModel.state.value == ResultState.loading)
+                Positioned(
+                  bottom: 80,
+                  child: Image.asset(
+                    'assets/images/pokeLoad.gif',
+                    scale: 2 / 3,
                   ),
-              ],
-            );
-          }),
-        ),
+                ),
+            ],
+          );
+        }),
       ),
     );
   }
