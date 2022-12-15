@@ -26,7 +26,10 @@ class MovesPokemon extends StatelessWidget {
             child: Center(
               child: Text(
                 poke.pokemonDetailsStats.moves![index],
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(color: Colors.white),
               ),
             ))),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

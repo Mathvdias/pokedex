@@ -59,7 +59,10 @@ class CardPokemon extends StatelessWidget {
                   children: [
                     Text(
                       '#${poke.id.toString()}',
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1
+                          ?.copyWith(fontSize: 32),
                     ),
                     Text(
                       '${toBeginningOfSentenceCase(poke.name)}',

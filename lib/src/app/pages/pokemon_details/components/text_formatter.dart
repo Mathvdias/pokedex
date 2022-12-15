@@ -25,7 +25,7 @@ class TextFormatterSpecs extends StatelessWidget {
           SizedBox(
             width: 80,
             child: Text(description,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                style: Theme.of(context).textTheme.headline3?.copyWith(
                       color:
                           setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
                     )),
@@ -35,7 +35,8 @@ class TextFormatterSpecs extends StatelessWidget {
           ),
           Text(
             text,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style:
+                Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 12),
           ),
           const SizedBox(
             height: 10,

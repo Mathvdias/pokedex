@@ -52,7 +52,10 @@ class _HomePageState extends State<HomePage>
               bottomRight: Radius.circular(12),
               bottomLeft: Radius.circular(12)),
         ),
-        title: const Text("PokeDex"),
+        title: Text(
+          "PokeDex",
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 23),
+        ),
         centerTitle: true,
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(45),

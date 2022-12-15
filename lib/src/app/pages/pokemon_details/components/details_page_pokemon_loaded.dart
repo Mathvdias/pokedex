@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pokedex/src/app/common/chip_component.dart';
 import '../../../common/colors/map_card_color.dart';
 import '../../../states/pokemons_states.dart';
 import 'about_pokemon.dart';
@@ -29,18 +30,25 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               toBeginningOfSentenceCase(
                   widget.loadedPokemonState.pokemonDetailsStats.name)!,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 20),
             ),
             const SizedBox(
               width: 10,
             ),
             Text(
               "#${widget.loadedPokemonState.pokemonDetailsStats.id.toString()}",
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 15),
             )
           ],
         ),
@@ -69,36 +77,14 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               if (widget.loadedPokemonState.pokemonDetailsStats.type1 != null)
-                Chip(
-                  backgroundColor: setTypeColor(
-                      widget.loadedPokemonState.pokemonDetailsStats.type1!),
-                  label: Text(
-                    toBeginningOfSentenceCase(
-                        widget.loadedPokemonState.pokemonDetailsStats.type1 ??
-                            '')!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(color: Colors.white, fontSize: 12),
-                  ),
-                ),
+                ChipComponent(
+                    poke: widget.loadedPokemonState.pokemonDetailsStats.type1!),
               const SizedBox(
                 width: 5,
               ),
               if (widget.loadedPokemonState.pokemonDetailsStats.type2 != null)
-                Chip(
-                  backgroundColor: setTypeColor(
-                      widget.loadedPokemonState.pokemonDetailsStats.type2!),
-                  label: Text(
-                    toBeginningOfSentenceCase(
-                        widget.loadedPokemonState.pokemonDetailsStats.type2 ??
-                            '')!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(color: Colors.white, fontSize: 12),
-                  ),
-                )
+                ChipComponent(
+                    poke: widget.loadedPokemonState.pokemonDetailsStats.type2!)
             ],
           ),
           const SizedBox(
@@ -109,7 +95,10 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             child: FittedBox(
               child: Text(
                 widget.loadedPokemonState.pokemonDetails.description.toString(),
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 12),
               ),
             ),
           ),

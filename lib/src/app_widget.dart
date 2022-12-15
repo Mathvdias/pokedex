@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/src/app/common/text_theme.dart';
 import 'package:provider/provider.dart';
 
 import 'app/pages/pokemon_details/details_pokemon_page.dart';
@@ -17,6 +18,7 @@ class PokedexApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'PokeDex',
           theme: ThemeData(
+            textTheme: ThemesPokedex.textTheme,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
             useMaterial3: true,

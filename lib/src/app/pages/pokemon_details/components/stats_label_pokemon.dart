@@ -28,17 +28,15 @@ class StatsLabel extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            style: Theme.of(context).textTheme.headline3?.copyWith(
                   color: setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
                 ),
           ),
           const Spacer(),
           Text(
             convertValue(value),
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
-            ),
+            style: Theme.of(context).textTheme.headline4?.copyWith(
+                color: setTypeColor(model.pokemonDetailsStats.type1 ?? '')),
           ),
           Container(
             width: 150,
