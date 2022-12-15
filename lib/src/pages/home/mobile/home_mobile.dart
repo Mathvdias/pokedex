@@ -5,16 +5,16 @@ import 'components/card_pokemon.dart';
 import 'components/search_bar_component.dart';
 
 class HomeIsMobile extends StatelessWidget {
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final PokemonsViewModel viewModel;
+  final ScrollController scrollController;
+
   const HomeIsMobile({
     Key? key,
     required this.scaffoldKey,
     required this.viewModel,
     required this.scrollController,
   }) : super(key: key);
-
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final PokemonsViewModel viewModel;
-  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
