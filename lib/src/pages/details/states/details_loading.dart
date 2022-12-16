@@ -5,9 +5,12 @@ class DetailsPagePokemonLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Center(
-        child: Image.asset('assets/images/pokeLoad.gif'),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Center(
+          child: Image.asset('assets/images/pokeLoad.gif'),
+        ),
       ),
     );
   }
