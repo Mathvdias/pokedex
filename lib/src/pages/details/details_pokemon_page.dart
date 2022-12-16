@@ -49,7 +49,7 @@ class _DetailsPokemonState extends State<DetailsPokemon> {
     final PokemonDetailViewModel viewModel =
         context.watch<PokemonDetailViewModel>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: AnimatedBuilder(
           animation: viewModel,
           builder: (_, child) {

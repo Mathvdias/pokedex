@@ -21,6 +21,7 @@ class LoadedIsMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +59,7 @@ class LoadedIsMobile extends StatelessWidget {
         children: [
           Image(
             image: CachedNetworkImageProvider(
-             poke.pokemonDetailsStats.sprite.toString(),
+              poke.pokemonDetailsStats.sprite.toString(),
               maxHeight: 350,
               maxWidth: 350,
             ),
@@ -76,7 +77,7 @@ class LoadedIsMobile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               if (poke.pokemonDetailsStats.type1 != null)
-                ChipComponent(poke:poke.pokemonDetailsStats.type1!),
+                ChipComponent(poke: poke.pokemonDetailsStats.type1!),
               const SizedBox(
                 width: 5,
               ),
@@ -91,7 +92,7 @@ class LoadedIsMobile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: FittedBox(
               child: Text(
-              poke.pokemonDetails.description.toString(),
+                poke.pokemonDetails.description.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1
