@@ -24,7 +24,6 @@ class HomeIsWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
       key: scaffoldKey,
       appBar: AppBar(
         scrolledUnderElevation: 3,
@@ -49,20 +48,16 @@ class HomeIsWeb extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width / 4),
-        child: AnimatedBuilder(
-          animation: viewModel.state,
-          builder: ((context, child) {
-            return GridViewWidget(
-              viewModel: viewModel,
-              scrollController: scrollController,
-              height: height,
-              width: width,
-            );
-          }),
-        ),
+      body: AnimatedBuilder(
+        animation: viewModel.state,
+        builder: ((context, child) {
+          return GridViewWidget(
+            viewModel: viewModel,
+            scrollController: scrollController,
+            height: height,
+            width: width,
+          );
+        }),
       ),
     );
   }

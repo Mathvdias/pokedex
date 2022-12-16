@@ -25,6 +25,8 @@ class GridViewWidget extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         GridView.builder(
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width / 4),
           shrinkWrap: true,
           controller: scrollController,
           itemCount: viewModel.listAllPokemon.length,
