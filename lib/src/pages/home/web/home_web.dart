@@ -49,21 +49,19 @@ class HomeIsWeb extends StatelessWidget {
           ),
         ),
       ),
-      body: SizedBox.expand(
-        child: FractionallySizedBox(
-          widthFactor: 0.5,
-          alignment: FractionalOffset.bottomCenter,
-          child: AnimatedBuilder(
-            animation: viewModel.state,
-            builder: ((context, child) {
-              return GridViewWidget(
-                viewModel: viewModel,
-                scrollController: scrollController,
-                height: height,
-                width: width,
-              );
-            }),
-          ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width / 4),
+        child: AnimatedBuilder(
+          animation: viewModel.state,
+          builder: ((context, child) {
+            return GridViewWidget(
+              viewModel: viewModel,
+              scrollController: scrollController,
+              height: height,
+              width: width,
+            );
+          }),
         ),
       ),
     );
