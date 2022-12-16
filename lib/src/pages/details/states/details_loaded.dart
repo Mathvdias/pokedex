@@ -40,6 +40,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
         return LoadedIsMobile(tabController: tabController, poke: widget.poke);
       } else {
         return Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
               title: Text(
             "PokeDex Data",
