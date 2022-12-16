@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -292,6 +290,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
             ),
           ),
           bottomNavigationBar: BottomAppBar(
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: OverflowBar(
