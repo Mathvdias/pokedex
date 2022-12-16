@@ -18,6 +18,7 @@ class MovesPokemon extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: GridView.builder(
+        shrinkWrap: true,
         itemCount: poke.pokemonDetailsStats.moves!.length,
         itemBuilder: ((context, index) => Container(
             decoration: BoxDecoration(

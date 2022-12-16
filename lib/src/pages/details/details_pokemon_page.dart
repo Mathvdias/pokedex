@@ -66,7 +66,7 @@ class _DetailsPokemonState extends State<DetailsPokemon> {
               return DetailsPagePokemonError(
                   errorPokemonState: viewModel.value as ErrorPokemonState);
             }
-            return const Text("Tipo de estado não definido");
+            return const Center(child: Text("Tipo de estado não definido"));
           }),
     );
   }
