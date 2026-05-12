@@ -6,10 +6,7 @@ import '../../../common/colors/map_card_color.dart';
 import '../../../states/pokemons_states.dart';
 
 class MovesPokemon extends StatelessWidget {
-  const MovesPokemon({
-    Key? key,
-    required this.poke,
-  }) : super(key: key);
+  const MovesPokemon({super.key, required this.poke});
 
   final LoadedPokemonState poke;
 
@@ -29,7 +26,7 @@ class MovesPokemon extends StatelessWidget {
               child: Text(
                 toBeginningOfSentenceCase(
                     poke.pokemonDetailsStats.moves![index])!,
-                style: Theme.of(context).textTheme.headline6?.copyWith(
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.white,
                   shadows: <Shadow>[
                     const Shadow(

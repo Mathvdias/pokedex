@@ -4,12 +4,7 @@ import '../../../common/colors/map_card_color.dart';
 import '../../../states/pokemons_states.dart';
 
 class StatsLabel extends StatelessWidget {
-  const StatsLabel({
-    Key? key,
-    required this.label,
-    required this.value,
-    required this.model,
-  }) : super(key: key);
+  const StatsLabel({super.key, required this.label, required this.value, required this.model});
   final String label;
   final int value;
   final LoadedPokemonState model;
@@ -28,14 +23,14 @@ class StatsLabel extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context).textTheme.headline3?.copyWith(
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
                   color: setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
                 ),
           ),
           const Spacer(),
           Text(
             convertValue(value),
-            style: Theme.of(context).textTheme.headline4?.copyWith(
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 color: setTypeColor(model.pokemonDetailsStats.type1 ?? '')),
           ),
           Container(

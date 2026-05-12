@@ -5,10 +5,7 @@ import 'package:pokedex/src/common/set_icon.dart';
 import 'colors/map_card_color.dart';
 
 class ChipComponent extends StatelessWidget {
-  const ChipComponent({
-    Key? key,
-    required this.poke,
-  }) : super(key: key);
+  const ChipComponent({super.key, required this.poke});
 
   final String poke;
 
@@ -37,7 +34,7 @@ class ChipComponent extends StatelessWidget {
             ),
             Text(
               toBeginningOfSentenceCase(poke)!,
-              style: Theme.of(context).textTheme.subtitle1?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Colors.white,
                 fontSize: 10,
                 shadows: const <Shadow>[

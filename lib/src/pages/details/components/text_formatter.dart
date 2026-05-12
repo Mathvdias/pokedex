@@ -4,12 +4,7 @@ import '../../../common/colors/map_card_color.dart';
 import '../../../states/pokemons_states.dart';
 
 class TextFormatterSpecs extends StatelessWidget {
-  const TextFormatterSpecs({
-    Key? key,
-    required this.description,
-    required this.text,
-    required this.model,
-  }) : super(key: key);
+  const TextFormatterSpecs({super.key, required this.description, required this.text, required this.model});
   final String description;
   final String text;
   final LoadedPokemonState model;
@@ -25,7 +20,7 @@ class TextFormatterSpecs extends StatelessWidget {
           SizedBox(
             width: 80,
             child: Text(description,
-                style: Theme.of(context).textTheme.headline3?.copyWith(
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
                       color:
                           setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
                     )),

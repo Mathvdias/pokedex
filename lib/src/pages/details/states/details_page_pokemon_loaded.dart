@@ -103,7 +103,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
                 widget.loadedPokemonState.pokemonDetails.description.toString(),
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1
+                    .titleMedium
                     ?.copyWith(fontSize: 20),
               ),
             ),
