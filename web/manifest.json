@@ -1,13 +1,15 @@
 {
-    "name": "pokedex",
-    "short_name": "pokedex",
-    "start_url": ".",
+    "name": "PokeDex",
+    "short_name": "PokeDex",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FF6D00",
+    "description": "Explore todos os Pokémon com stats, tipos e movimentos.",
+    "orientation": "any",
     "prefer_related_applications": false,
+    "categories": ["games", "entertainment"],
+    "lang": "pt-BR",
     "icons": [
         {
             "src": "icons/Icon-192.png",

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../../details/details_pokemon_page.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchBarComponent extends StatefulWidget {
   const SearchBarComponent({super.key});
@@ -14,8 +13,8 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
 
   @override
   void dispose() {
-    super.dispose();
     _textController.dispose();
+    super.dispose();
   }
 
   @override
@@ -26,14 +25,10 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
       controller: _textController,
       onSubmitted: (value) {
         if (value.isNotEmpty) {
-          Navigator.pushNamed(
-            context,
-            DetailsPokemon.routeName,
-            arguments: (value).toLowerCase(),
-          );
+          context.go('/details/${value.toLowerCase()}');
         }
       },
-      placeholder: "Pesquise um pokémon pelo nome ou id",
+      placeholder: 'Pesquise um pokémon pelo nome ou id',
     );
   }
 }

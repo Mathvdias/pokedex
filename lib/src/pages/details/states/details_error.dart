@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../states/pokemons_states.dart';
 
 class DetailsPagePokemonError extends StatelessWidget {
-  const DetailsPagePokemonError({
-    Key? key,
-    required this.errorPokemonState,
-  }) : super(key: key);
+  const DetailsPagePokemonError({super.key, required this.errorPokemonState});
 
   final ErrorPokemonState errorPokemonState;
   @override
@@ -25,7 +23,7 @@ class DetailsPagePokemonError extends StatelessWidget {
             Icon(
               Icons.search_off_rounded,
               size: 100,
-              color: Theme.of(context).errorColor,
+              color: Theme.of(context).colorScheme.error,
             ),
             Text(
               'Ops, Houve uma falha ao mostrar os detalhes',
@@ -42,11 +40,11 @@ class DetailsPagePokemonError extends StatelessWidget {
               flex: 2,
             ),
             ElevatedButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.go('/'),
               child: Text(
                 'Voltar para o início :)',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).errorColor,
+                      color: Theme.of(context).colorScheme.error,
                     ),
               ),
             ),

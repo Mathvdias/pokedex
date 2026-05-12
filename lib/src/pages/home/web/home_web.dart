@@ -50,18 +50,18 @@ class HomeIsWeb extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        controller: scrollController,
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width / 4),
         child: AnimatedBuilder(
           animation: viewModel.state,
-          builder: ((context, child) {
+          builder: (context, child) {
             return GridViewWidget(
               viewModel: viewModel,
-              scrollController: scrollController,
               height: height,
               width: width,
             );
-          }),
+          },
         ),
       ),
     );

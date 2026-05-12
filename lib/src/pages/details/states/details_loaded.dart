@@ -127,7 +127,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
                           Text(
                             'Description',
                             style:
-                                Theme.of(context).textTheme.subtitle1?.copyWith(
+                                Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontSize: 20,
                               shadows: <Shadow>[
                                 const Shadow(
@@ -143,7 +143,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
                           ),
                           Text(
                             widget.poke.pokemonDetails.description.toString(),
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(
                             height: 20,
@@ -151,7 +151,7 @@ class _DetailsPagePokemonLoadedState extends State<DetailsPagePokemonLoaded>
                           Text(
                             'Types',
                             style:
-                                Theme.of(context).textTheme.subtitle1?.copyWith(
+                                Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontSize: 20,
                               shadows: <Shadow>[
                                 const Shadow(

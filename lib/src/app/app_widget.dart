@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/src/app/text_theme.dart';
 import 'package:provider/provider.dart';
 
-import '../pages/details/details_pokemon_page.dart';
-import '../pages/home/pokemons_page.dart';
 import 'app_providers.dart';
+import 'router.dart';
 
 class PokedexApp extends StatelessWidget {
   const PokedexApp({super.key});
@@ -12,27 +11,21 @@ class PokedexApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: providers,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'PokeDex',
-          theme: ThemeData(
-            textTheme: ThemesPokedex.textTheme,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
-            useMaterial3: true,
-            primarySwatch: Colors.orange,
+      providers: providers,
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'PokeDex',
+        routerConfig: appRouter,
+        theme: ThemeData(
+          textTheme: ThemesPokedex.textTheme,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.deepOrange,
+            brightness: Brightness.light,
           ),
-          initialRoute: '/',
-          routes: {
-            '/': (_) {
-              return const Banner(
-                  location: BannerLocation.topEnd,
-                  message: 'Matheus',
-                  child: HomePage());
-            },
-            DetailsPokemon.routeName: (context) => const DetailsPokemon(),
-          },
-        ));
+          useMaterial3: true,
+        ),
+      ),
+    );
   }
 }
