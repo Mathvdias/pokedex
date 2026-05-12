@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "buildCommand": "flutter build web --release",
+  "buildCommand": "chmod +x build.sh && ./build.sh",
   "outputDirectory": "build/web",
-  "installCommand": "flutter pub get"
+  "installCommand": "echo 'Flutter installed by build.sh'"
 }
