@@ -9,15 +9,15 @@ final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: lazy(home.loadLibrary, home.HomePage.new),
+      builder: lazy(home.loadLibrary, () => home.HomePage()),
     ),
     GoRoute(
       path: '/details/:id',
-      builder: lazy(details.loadLibrary, details.DetailsPokemon.new),
+      builder: lazy(details.loadLibrary, () => details.DetailsPokemon()),
     ),
     GoRoute(
       path: '/splash',
-      builder: lazy(splash.loadLibrary, splash.SplashPage.new),
+      builder: lazy(splash.loadLibrary, () => splash.SplashPage()),
     ),
   ],
 );
