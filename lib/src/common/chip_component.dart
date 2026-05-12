@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/src/common/set_icon.dart';
 
 import 'colors/map_card_color.dart';
@@ -11,42 +11,34 @@ class ChipComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-        backgroundColor: setTypeColor(poke),
-        label: Row(
-          children: [
-            Text(
-              setTypeIcon(poke),
-              style: const TextStyle(
-                fontFamily: 'PokeGoTypes',
-                color: Colors.white,
-                shadows: <Shadow>[
-                  Shadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 7,
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+      decoration: BoxDecoration(
+        color: setTypeColor(poke),
+        borderRadius: BorderRadius.circular(3),
+        border: Border.all(color: Colors.black, width: 1.5),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            setTypeIcon(poke),
+            style: const TextStyle(
+              fontFamily: 'PokeGoTypes',
+              fontSize: 12,
+              color: Colors.white,
             ),
-            const SizedBox(
-              width: 5,
+          ),
+          const SizedBox(width: 3),
+          Text(
+            poke.toUpperCase(),
+            style: GoogleFonts.pressStart2p(
+              fontSize: 6,
+              color: Colors.white,
             ),
-            Text(
-              toBeginningOfSentenceCase(poke)!,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontSize: 10,
-                shadows: const <Shadow>[
-                  Shadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 7,
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

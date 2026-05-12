@@ -20,8 +20,25 @@ class PokedexApp extends StatelessWidget {
           textTheme: ThemesPokedex.textTheme,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepOrange,
+            seedColor: PokedexColors.red,
             brightness: Brightness.light,
+            surface: PokedexColors.cream,
+          ),
+          scaffoldBackgroundColor: PokedexColors.cream,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: PokedexColors.red,
+            foregroundColor: Colors.white,
+            elevation: 4,
+            shadowColor: Colors.black,
+            centerTitle: true,
+          ),
+          cardTheme: CardThemeData(
+            elevation: 0,
+            margin: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+              side: const BorderSide(color: Colors.black, width: 2),
+            ),
           ),
           useMaterial3: true,
         ),

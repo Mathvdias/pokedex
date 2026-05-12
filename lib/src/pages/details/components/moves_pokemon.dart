@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/colors/map_card_color.dart';
-
 import '../../../states/pokemons_states.dart';
 
 class MovesPokemon extends StatelessWidget {
@@ -12,37 +12,37 @@ class MovesPokemon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final typeColor = setTypeColor(poke.pokemonDetailsStats.type1.toString());
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.all(12),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: poke.pokemonDetailsStats.moves!.length,
-        itemBuilder: ((context, index) => Container(
-            decoration: BoxDecoration(
-              color: setTypeColor(poke.pokemonDetailsStats.type1.toString()),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Center(
-              child: Text(
-                toBeginningOfSentenceCase(
-                    poke.pokemonDetailsStats.moves![index])!,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
-                  shadows: <Shadow>[
-                    const Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 7,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-              ),
-            ))),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 6 / 1.5,
-          crossAxisSpacing: 4,
-          mainAxisSpacing: 4,
-          crossAxisCount: 3,
+          crossAxisCount: 2,
+          childAspectRatio: 4,
+          crossAxisSpacing: 6,
+          mainAxisSpacing: 6,
+        ),
+        itemBuilder: (context, index) => Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: typeColor,
+            borderRadius: BorderRadius.circular(3),
+            border: Border.all(color: Colors.black, width: 1.5),
+          ),
+          child: Text(
+            (toBeginningOfSentenceCase(
+                  poke.pokemonDetailsStats.moves![index].toString(),
+                ) ??
+                '').toUpperCase(),
+            style: GoogleFonts.pressStart2p(
+              fontSize: 6,
+              color: Colors.white,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );

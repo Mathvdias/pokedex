@@ -1,50 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pokedex/src/app/text_theme.dart';
 
 import '../../../common/colors/map_card_color.dart';
 import '../../../states/pokemons_states.dart';
 
 class StatsLabel extends StatelessWidget {
-  const StatsLabel({super.key, required this.label, required this.value, required this.model});
+  const StatsLabel({
+    super.key,
+    required this.label,
+    required this.value,
+    required this.model,
+  });
+
   final String label;
   final int value;
   final LoadedPokemonState model;
+
+  Color _barColor() {
+    if (value >= 100) return const Color(0xFF4CAF50);
+    if (value >= 70) return const Color(0xFF8BC34A);
+    if (value >= 50) return const Color(0xFFFFD700);
+    return const Color(0xFFE3350D);
+  }
+
   @override
   Widget build(BuildContext context) {
-    convertValue(value) {
-      int initValue = value;
-      return initValue.toStringAsFixed(0);
-    }
+    final typeColor = setTypeColor(model.pokemonDetailsStats.type1 ?? '');
+    final barFill = (value / 255).clamp(0.0, 1.0);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: setTypeColor(model.pokemonDetailsStats.type1 ?? ''),
+          SizedBox(
+            width: 44,
+            child: Text(
+              label,
+              style: GoogleFonts.pressStart2p(fontSize: 7, color: typeColor),
+            ),
+          ),
+          const SizedBox(width: 8),
+          SizedBox(
+            width: 36,
+            child: Text(
+              value.toString().padLeft(3),
+              textAlign: TextAlign.right,
+              style: GoogleFonts.vt323(fontSize: 20, color: PokedexColors.dark, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Stack(
+              children: [
+                // Background track (pixel)
+                Container(
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    border: Border.all(color: Colors.black, width: 1),
+                  ),
                 ),
-          ),
-          const Spacer(),
-          Text(
-            convertValue(value),
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: setTypeColor(model.pokemonDetailsStats.type1 ?? '')),
-          ),
-          Container(
-            width: 200,
-            height: 10,
-            margin: const EdgeInsets.only(left: 15),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: LinearProgressIndicator(
-                backgroundColor: Colors.grey[300],
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    setTypeColor(model.pokemonDetailsStats.type1 ?? '')),
-                value: value / 300,
-              ),
+                // Fill bar
+                FractionallySizedBox(
+                  widthFactor: barFill,
+                  child: Container(
+                    height: 10,
+                    color: _barColor(),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pokedex/src/app/text_theme.dart';
 
 import '../../../viewmodels/pokemons_viewmodel.dart';
 import 'components/card_pokemon.dart';
@@ -10,69 +12,65 @@ class HomeIsMobile extends StatelessWidget {
   final ScrollController scrollController;
 
   const HomeIsMobile({
-    Key? key,
+    super.key,
     required this.scaffoldKey,
     required this.viewModel,
     required this.scrollController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
+      backgroundColor: PokedexColors.cream,
       key: scaffoldKey,
       appBar: AppBar(
-        scrolledUnderElevation: 3,
-        shadowColor: Colors.orange,
-        elevation: 0,
-        toolbarHeight: 60.2,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(12),
-              bottomLeft: Radius.circular(12)),
-        ),
+        backgroundColor: PokedexColors.red,
+        toolbarHeight: 56,
         title: Text(
-          "PokeDex",
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 23),
+          'POKÉDEX',
+          style: GoogleFonts.pressStart2p(
+            fontSize: 14,
+            color: Colors.white,
+            letterSpacing: 2,
+          ),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(45),
+          preferredSize: Size.fromHeight(52),
           child: Padding(
-            padding: EdgeInsets.fromLTRB(5, 0, 5, 8),
+            padding: EdgeInsets.fromLTRB(12, 0, 12, 10),
             child: SearchBarComponent(),
           ),
         ),
+        shape: const Border(bottom: BorderSide(color: Colors.black, width: 3)),
       ),
       body: AnimatedBuilder(
         animation: viewModel.state,
-        builder: ((context, child) {
-          return Stack(
-            alignment: Alignment.bottomCenter,
-            children: <Widget>[
-              ListView.builder(
-                  shrinkWrap: true,
-                  controller: scrollController,
-                  itemCount: viewModel.listAllPokemon.length,
-                  itemBuilder: ((context, index) {
-                    final poke = viewModel.listAllPokemon[index];
-                    return CardPokemonComponent(
-                      poke: poke,
-                      index: index,
-                    );
-                  })),
-              if (viewModel.state.value == ResultState.loading)
-                Positioned(
-                  bottom: 80,
-                  child: Image.asset(
-                    'assets/images/pokeLoad.gif',
-                    scale: 2 / 3,
+        builder: (context, child) {
+          final isLoading = viewModel.state.value == ResultState.loading;
+          final itemCount = viewModel.listAllPokemon.length + (isLoading ? 1 : 0);
+
+          return ListView.builder(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            itemCount: itemCount,
+            itemBuilder: (context, index) {
+              if (index == viewModel.listAllPokemon.length) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Center(
+                    child: Image.asset('assets/images/pokeLoad.gif', height: 60),
                   ),
-                ),
-            ],
+                );
+              }
+              final poke = viewModel.listAllPokemon[index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: CardPokemonComponent(poke: poke, index: index),
+              );
+            },
           );
-        }),
+        },
       ),
     );
   }

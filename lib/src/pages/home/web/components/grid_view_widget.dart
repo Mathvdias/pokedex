@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:pokedex/src/app/text_theme.dart';
 
 import '../../../../common/chip_component.dart';
 import '../../../../common/colors/map_card_color.dart';
@@ -21,95 +23,92 @@ class GridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: <Widget>[
+    final isLoading = viewModel.state.value == ResultState.loading;
+    final crossAxisCount = width < 600 ? 2 : width < 900 ? 3 : width < 1200 ? 4 : 5;
+
+    return Column(
+      children: [
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: viewModel.listAllPokemon.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 3 / 4.2,
+          ),
           itemBuilder: (context, index) {
             final poke = viewModel.listAllPokemon[index];
-            return FractionallySizedBox(
-              widthFactor: 0.9,
-              heightFactor: 0.9,
-              child: Card(
-                shadowColor: setCardColor(poke.type1).withValues(alpha: 0.6),
-                color: setCardColor(poke.type1),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () => context.go('/details/${poke.id}'),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: CachedNetworkImageProvider(
-                          poke.sprite.toString(),
-                          maxHeight: 100,
-                          maxWidth: 100,
-                        ),
-                        loadingBuilder: (context, child, progress) {
-                          if (progress == null) return child;
-                          return Expanded(
-                            child: Center(child: Image.asset('assets/images/pokeLoad.gif')),
-                          );
-                        },
+            final typeColor = setCardColor(poke.type1);
+
+            return GestureDetector(
+              onTap: () => context.go('/details/${poke.id}'),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: typeColor,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: Colors.black, width: 2),
+                  boxShadow: const [BoxShadow(color: Colors.black, offset: Offset(3, 3))],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '#${poke.id.toString().padLeft(3, '0')}',
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 8,
+                        color: PokedexColors.yellow,
+                        shadows: const [Shadow(color: Colors.black45, offset: Offset(1, 1))],
                       ),
-                      const Spacer(),
-                      Text(
-                        '#${poke.id}',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: width <= 1280 ? 20 : 25,
-                              color: Colors.black54,
-                            ),
+                    ),
+                    const SizedBox(height: 4),
+                    CachedNetworkImage(
+                      imageUrl: poke.sprite.toString(),
+                      height: 90,
+                      width: 90,
+                      placeholder: (_, __) => SizedBox(
+                        height: 90,
+                        child: Center(child: Image.asset('assets/images/pokeLoad.gif', height: 50)),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: FittedBox(
-                          child: Text(
-                            toBeginningOfSentenceCase(poke.name) ?? poke.name,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
-                              fontSize: width <= 1390 && width >= 1110 ? 15 : width < 1110 ? 16 : 25,
-                              shadows: const [
-                                Shadow(offset: Offset(2, 2), blurRadius: 7, color: Colors.grey),
-                              ],
-                            ),
+                      errorWidget: (_, __, ___) => const Icon(Icons.catching_pokemon, size: 60, color: Colors.white54),
+                    ),
+                    const SizedBox(height: 4),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: FittedBox(
+                        child: Text(
+                          (toBeginningOfSentenceCase(poke.name) ?? poke.name).toUpperCase(),
+                          style: GoogleFonts.pressStart2p(
+                            fontSize: 8,
+                            color: Colors.white,
+                            shadows: const [Shadow(color: Colors.black45, offset: Offset(1, 1))],
                           ),
                         ),
                       ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: FittedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ChipComponent(poke: poke.type1),
-                              const SizedBox(width: 5),
-                              if (poke.type2 != null) ChipComponent(poke: poke.type2!),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ChipComponent(poke: poke.type1),
+                        if (poke.type2 != null) ...[
+                          const SizedBox(width: 4),
+                          ChipComponent(poke: poke.type2!),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                  ],
                 ),
               ),
             );
           },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 3 / 5,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-            crossAxisCount: width < 835 ? 2 : width < 1280 ? 3 : 4,
-          ),
         ),
-        if (viewModel.state.value == ResultState.loading)
-          Positioned(
-            bottom: height * .1,
-            child: Image.asset('assets/images/pokeLoad.gif', scale: 3 / 4),
+        if (isLoading)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Center(child: Image.asset('assets/images/pokeLoad.gif', height: 70)),
           ),
       ],
     );
