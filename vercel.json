@@ -2,6 +2,5 @@
   "framework": null,
   "buildCommand": "flutter build web --release",
   "outputDirectory": "build/web",
-  "installCommand": "flutter pub get",
-  "nodeVersion": "24.x"
+  "installCommand": "flutter pub get"
 }
